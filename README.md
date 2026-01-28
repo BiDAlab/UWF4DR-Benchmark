@@ -1,4 +1,4 @@
-# UWF4DR-DeepLearning
+# UWF4DR-Benchmark
 
 This repository provides the experimental protocol, model configurations, and
 reproducibility resources associated with the paper:
