@@ -90,7 +90,7 @@ def main():
     parser.add_argument("--data_root", required=True)
     parser.add_argument(
         "--split_csv",
-        default="data/splits/task1_quality.csv"
+        default="data/splits/task1_split.csv"
     )
     parser.add_argument(
         "--output_dir",
@@ -111,4 +111,5 @@ def main():
 
 
 if __name__ == "__main__":
+
     main()
