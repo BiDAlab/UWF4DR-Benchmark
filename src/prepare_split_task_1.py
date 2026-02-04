@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Feb  4 15:53:20 2026
-
-@author: pablo
-"""
-
 import os
 import argparse
 import pandas as pd
@@ -175,3 +168,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
