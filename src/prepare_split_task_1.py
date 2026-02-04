@@ -113,7 +113,7 @@ def build_task1_datasets(
 
     for _, row in merged.iterrows():
         image_path = find_image(row["image_id"], search_roots)
-        datasets[row["split"]].append((image_path, row[label_col]))
+        datasets[row["split"]].append((image_path, int(row[label_col])))
 
     return datasets
 
@@ -168,4 +168,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
