@@ -10,11 +10,18 @@ import argparse
 import pandas as pd
 
 
+# Fixed path to the split definition used in the paper
+TASK1_SPLIT_CSV = "data/splits/task1_split.csv"
+
+
 def load_official_annotations(task_root):
+    """
+    Load official Task 1 annotations from the UWF4DR dataset.
+    """
     records = []
 
     for split_name in ["Training", "Validation"]:
-        # NOTE: Folder name must match the official dataset structure exactly
+        # Folder name must match the official dataset structure exactly
         gt_dir = os.path.join(task_root, split_name, "2. Groundtruths")
 
         if not os.path.isdir(gt_dir):
@@ -22,7 +29,9 @@ def load_official_annotations(task_root):
 
         csv_files = [f for f in os.listdir(gt_dir) if f.endswith(".csv")]
         if len(csv_files) != 1:
-            raise RuntimeError(f"Expected 1 CSV in {gt_dir}, found {csv_files}")
+            raise RuntimeError(
+                f"Expected exactly 1 CSV in {gt_dir}, found {csv_files}"
+            )
 
         df = pd.read_csv(os.path.join(gt_dir, csv_files[0]))
 
@@ -35,15 +44,23 @@ def load_official_annotations(task_root):
 
 
 def get_image_path(task_root, image_id):
+    """
+    Locate an image file in the Training or Validation folders.
+    """
     for split_name in ["Training", "Validation"]:
-        p = os.path.join(task_root, split_name, "1. Images", image_id)
-        if os.path.exists(p):
-            return p
+        path = os.path.join(task_root, split_name, "1. Images", image_id)
+        if os.path.exists(path):
+            return path
+
     raise FileNotFoundError(f"Image not found: {image_id}")
 
 
-def build_task1_datasets(task_root, split_csv):
-    split_df = pd.read_csv(split_csv)
+def build_task1_datasets(task_root):
+    """
+    Build train/validation/test datasets using the fixed split definition
+    provided in the repository and the official UWF4DR annotations.
+    """
+    split_df = pd.read_csv(TASK1_SPLIT_CSV)
     annotations = load_official_annotations(task_root)
 
     merged = split_df.merge(
@@ -70,14 +87,18 @@ def build_task1_datasets(task_root, split_csv):
     datasets = {"train": [], "validation": [], "test": []}
 
     for _, row in merged.iterrows():
-        img_path = get_image_path(task_root, row["image_id"])
-        datasets[row["split"]].append((img_path, row[label_col]))
+        image_path = get_image_path(task_root, row["image_id"])
+        datasets[row["split"]].append((image_path, row[label_col]))
 
     return datasets
 
 
 def save_datasets(datasets, output_dir):
+    """
+    Save prepared datasets as CSV files (image_path, label).
+    """
     os.makedirs(output_dir, exist_ok=True)
+
     for split, samples in datasets.items():
         df = pd.DataFrame(samples, columns=["image_path", "label"])
         df.to_csv(os.path.join(output_dir, f"{split}.csv"), index=False)
@@ -85,22 +106,25 @@ def save_datasets(datasets, output_dir):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Prepare Task 1 dataset splits using official UWF4DR annotations"
+        description=(
+            "Prepare Task 1 dataset splits using official UWF4DR annotations "
+            "and the fixed split definition provided in the repository."
+        )
     )
-    parser.add_argument("--data_root", required=True)
     parser.add_argument(
-        "--split_csv",
-        default="data/splits/task1_split.csv"
+        "--data_root",
+        required=True,
+        help="Path to the local UWF4DR Task 1 dataset"
     )
     parser.add_argument(
         "--output_dir",
         default=None,
-        help="Optional directory to save prepared datasets"
+        help="Optional directory to save the prepared datasets as CSV files"
     )
 
     args = parser.parse_args()
 
-    datasets = build_task1_datasets(args.data_root, args.split_csv)
+    datasets = build_task1_datasets(args.data_root)
 
     for split, samples in datasets.items():
         print(f"{split}: {len(samples)} samples")
@@ -111,5 +135,4 @@ def main():
 
 
 if __name__ == "__main__":
-
     main()
