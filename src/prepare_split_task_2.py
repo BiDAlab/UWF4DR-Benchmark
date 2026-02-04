@@ -11,7 +11,9 @@ def load_official_annotations(task23_training_root, task23_validation_root):
     """
     Load official Task 2/3 annotations from the UWF4DR dataset.
 
-    ALL images belong to Task 2 (RDR Identification).
+    NOTE:
+    - All images belong to Task 2 (RDR Identification).
+    - The DME column may contain NaNs and MUST be ignored here.
     """
 
     records = []
@@ -66,6 +68,7 @@ def build_task2_datasets(task23_training_root, task23_validation_root):
     """
 
     split_df = pd.read_csv(TASK2_SPLIT_CSV)
+
     annotations = load_official_annotations(
         task23_training_root, task23_validation_root
     )
@@ -77,20 +80,21 @@ def build_task2_datasets(task23_training_root, task23_validation_root):
         how="left"
     ).drop(columns=["image"])
 
-    if merged.isna().any().any():
-        missing = merged[merged.isna().any(axis=1)]
-        raise RuntimeError(
-            f"Missing annotations for {len(missing)} images "
-            f"(first 5 shown): {missing['image_id'].tolist()[:5]}"
-        )
-
     # Identify label column for Task 2 (RDR)
     label_cols = [c for c in merged.columns if c not in ("image_id", "split")]
 
     if len(label_cols) < 1:
         raise RuntimeError("No label columns found in annotations")
 
-    rdr_col = label_cols[0]  # Task 2 label column
+    rdr_col = label_cols[0]
+
+    # Validate that Task 2 labels exist
+    if merged[rdr_col].isna().any():
+        missing = merged[merged[rdr_col].isna()]
+        raise RuntimeError(
+            f"Missing Task 2 labels for {len(missing)} images "
+            f"(first 5 shown): {missing['image_id'].tolist()[:5]}"
+        )
 
     datasets = {"train": [], "validation": [], "test": []}
 
