@@ -14,54 +14,71 @@ import pandas as pd
 TASK1_SPLIT_CSV = "data/splits/task1_split.csv"
 
 
-def load_official_annotations(task_root):
+def load_official_annotations(training_root, validation_root):
     """
     Load official Task 1 annotations from the UWF4DR dataset.
+
+    IMPORTANT:
+    - training_root and validation_root are TWO DIFFERENT directories,
+      even though they have the same name when downloaded.
     """
+
     records = []
 
-    for split_name in ["Training", "Validation"]:
-        # Folder name must match the official dataset structure exactly
-        gt_dir = os.path.join(task_root, split_name, "2. Groundtruths")
+    # Training annotations
+    train_gt = os.path.join(training_root, "2. Groundtruths", "1. Training.csv")
+    if not os.path.isfile(train_gt):
+        raise FileNotFoundError(f"Training groundtruth not found: {train_gt}")
 
-        if not os.path.isdir(gt_dir):
-            raise FileNotFoundError(f"Groundtruths folder not found: {gt_dir}")
+    df_train = pd.read_csv(train_gt)
+    if "image" not in df_train.columns:
+        raise RuntimeError("'image' column not found in Training groundtruth CSV")
 
-        csv_files = [f for f in os.listdir(gt_dir) if f.endswith(".csv")]
-        if len(csv_files) != 1:
-            raise RuntimeError(
-                f"Expected exactly 1 CSV in {gt_dir}, found {csv_files}"
-            )
+    records.append(df_train)
 
-        df = pd.read_csv(os.path.join(gt_dir, csv_files[0]))
+    # Validation annotations
+    val_gt = os.path.join(validation_root, "2. Groundtruths", "2. Validation.csv")
+    if not os.path.isfile(val_gt):
+        raise FileNotFoundError(f"Validation groundtruth not found: {val_gt}")
 
-        if "image" not in df.columns:
-            raise RuntimeError("'image' column not found in groundtruth CSV")
+    df_val = pd.read_csv(val_gt)
+    if "image" not in df_val.columns:
+        raise RuntimeError("'image' column not found in Validation groundtruth CSV")
 
-        records.append(df)
+    records.append(df_val)
 
     return pd.concat(records, ignore_index=True)
 
 
-def get_image_path(task_root, image_id):
+def get_image_path(training_root, validation_root, image_id):
     """
-    Locate an image file in the Training or Validation folders.
+    Locate an image file either in the Training or Validation image folders.
     """
-    for split_name in ["Training", "Validation"]:
-        path = os.path.join(task_root, split_name, "1. Images", image_id)
-        if os.path.exists(path):
-            return path
 
-    raise FileNotFoundError(f"Image not found: {image_id}")
+    train_img = os.path.join(
+        training_root, "1. Images", "1. Training", image_id
+    )
+    if os.path.exists(train_img):
+        return train_img
+
+    val_img = os.path.join(
+        validation_root, "1. Images", "2. Validation", image_id
+    )
+    if os.path.exists(val_img):
+        return val_img
+
+    raise FileNotFoundError(f"Image not found in Training or Validation: {image_id}")
 
 
-def build_task1_datasets(task_root):
+def build_task1_datasets(training_root, validation_root):
     """
-    Build train/validation/test datasets using the fixed split definition
-    provided in the repository and the official UWF4DR annotations.
+    Build train/validation/test datasets using:
+    - the fixed split definition provided in the repository
+    - the official UWF4DR Task 1 annotations
     """
+
     split_df = pd.read_csv(TASK1_SPLIT_CSV)
-    annotations = load_official_annotations(task_root)
+    annotations = load_official_annotations(training_root, validation_root)
 
     merged = split_df.merge(
         annotations,
@@ -87,7 +104,9 @@ def build_task1_datasets(task_root):
     datasets = {"train": [], "validation": [], "test": []}
 
     for _, row in merged.iterrows():
-        image_path = get_image_path(task_root, row["image_id"])
+        image_path = get_image_path(
+            training_root, validation_root, row["image_id"]
+        )
         datasets[row["split"]].append((image_path, row[label_col]))
 
     return datasets
@@ -107,14 +126,20 @@ def save_datasets(datasets, output_dir):
 def main():
     parser = argparse.ArgumentParser(
         description=(
-            "Prepare Task 1 dataset splits using official UWF4DR annotations "
-            "and the fixed split definition provided in the repository."
+            "Prepare Task 1 dataset splits using official UWF4DR annotations.\n\n"
+            "IMPORTANT: Training and Validation sets must be provided as TWO "
+            "separate directories, as downloaded from the competition."
         )
     )
     parser.add_argument(
-        "--data_root",
+        "--training_root",
         required=True,
-        help="Path to the local UWF4DR Task 1 dataset"
+        help="Path to the downloaded Task 1 TRAINING set"
+    )
+    parser.add_argument(
+        "--validation_root",
+        required=True,
+        help="Path to the downloaded Task 1 VALIDATION set"
     )
     parser.add_argument(
         "--output_dir",
@@ -124,7 +149,10 @@ def main():
 
     args = parser.parse_args()
 
-    datasets = build_task1_datasets(args.data_root)
+    datasets = build_task1_datasets(
+        args.training_root,
+        args.validation_root
+    )
 
     for split, samples in datasets.items():
         print(f"{split}: {len(samples)} samples")
