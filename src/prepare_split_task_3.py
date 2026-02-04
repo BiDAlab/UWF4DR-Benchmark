@@ -105,7 +105,7 @@ def build_task3_datasets(task23_training_root, task23_validation_root):
 
     for _, row in merged.iterrows():
         image_path = find_image(row["image_id"], search_roots)
-        datasets[row["split"]].append((image_path, row[dme_col]))
+        datasets[row["split"]].append((image_path, int(row[dme_col])))
 
     return datasets
 
