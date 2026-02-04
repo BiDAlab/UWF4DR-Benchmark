@@ -14,19 +14,19 @@ import pandas as pd
 TASK1_SPLIT_CSV = "data/splits/task1_split.csv"
 
 
-def load_official_annotations(training_root, validation_root):
+def load_official_annotations(task1_training_root, task1_validation_root):
     """
     Load official Task 1 annotations from the UWF4DR dataset.
 
-    IMPORTANT:
-    - training_root and validation_root are TWO DIFFERENT directories,
-      even though they have the same name when downloaded.
+    Training and Validation are TWO different directories
+    even though they have the same name when downloaded.
     """
 
     records = []
 
-    # Training annotations
-    train_gt = os.path.join(training_root, "2. Groundtruths", "1. Training.csv")
+    train_gt = os.path.join(
+        task1_training_root, "2. Groundtruths", "1. Training.csv"
+    )
     if not os.path.isfile(train_gt):
         raise FileNotFoundError(f"Training groundtruth not found: {train_gt}")
 
@@ -36,8 +36,9 @@ def load_official_annotations(training_root, validation_root):
 
     records.append(df_train)
 
-    # Validation annotations
-    val_gt = os.path.join(validation_root, "2. Groundtruths", "2. Validation.csv")
+    val_gt = os.path.join(
+        task1_validation_root, "2. Groundtruths", "2. Validation.csv"
+    )
     if not os.path.isfile(val_gt):
         raise FileNotFoundError(f"Validation groundtruth not found: {val_gt}")
 
@@ -50,35 +51,42 @@ def load_official_annotations(training_root, validation_root):
     return pd.concat(records, ignore_index=True)
 
 
-def get_image_path(training_root, validation_root, image_id):
+def find_image(image_id, search_roots):
     """
-    Locate an image file either in the Training or Validation image folders.
+    Search for an image file across multiple dataset roots.
+
+    Each root must follow the official UWF4DR structure.
     """
 
-    train_img = os.path.join(
-        training_root, "1. Images", "1. Training", image_id
+    for root in search_roots:
+        for subfolder in [("1. Images", "1. Training"),
+                          ("1. Images", "2. Validation")]:
+            candidate = os.path.join(root, *subfolder, image_id)
+            if os.path.exists(candidate):
+                return candidate
+
+    raise FileNotFoundError(
+        f"Image '{image_id}' not found in any provided dataset roots."
     )
-    if os.path.exists(train_img):
-        return train_img
-
-    val_img = os.path.join(
-        validation_root, "1. Images", "2. Validation", image_id
-    )
-    if os.path.exists(val_img):
-        return val_img
-
-    raise FileNotFoundError(f"Image not found in Training or Validation: {image_id}")
 
 
-def build_task1_datasets(training_root, validation_root):
+def build_task1_datasets(
+    task1_training_root,
+    task1_validation_root,
+    task23_training_root,
+    task23_validation_root
+):
     """
-    Build train/validation/test datasets using:
-    - the fixed split definition provided in the repository
-    - the official UWF4DR Task 1 annotations
+    Build train/validation/test datasets for Task 1 using:
+    - fixed split definition from the repository
+    - official Task 1 annotations
+    - image files possibly located in Task 1 or Task 2/3 folders
     """
 
     split_df = pd.read_csv(TASK1_SPLIT_CSV)
-    annotations = load_official_annotations(training_root, validation_root)
+    annotations = load_official_annotations(
+        task1_training_root, task1_validation_root
+    )
 
     merged = split_df.merge(
         annotations,
@@ -101,12 +109,17 @@ def build_task1_datasets(training_root, validation_root):
         )
     label_col = label_cols[0]
 
+    search_roots = [
+        task1_training_root,
+        task1_validation_root,
+        task23_training_root,
+        task23_validation_root,
+    ]
+
     datasets = {"train": [], "validation": [], "test": []}
 
     for _, row in merged.iterrows():
-        image_path = get_image_path(
-            training_root, validation_root, row["image_id"]
-        )
+        image_path = find_image(row["image_id"], search_roots)
         datasets[row["split"]].append((image_path, row[label_col]))
 
     return datasets
@@ -127,20 +140,16 @@ def main():
     parser = argparse.ArgumentParser(
         description=(
             "Prepare Task 1 dataset splits using official UWF4DR annotations.\n\n"
-            "IMPORTANT: Training and Validation sets must be provided as TWO "
-            "separate directories, as downloaded from the competition."
+            "IMPORTANT: Training and Validation sets must be provided as "
+            "separate directories, exactly as downloaded from the competition."
         )
     )
-    parser.add_argument(
-        "--training_root",
-        required=True,
-        help="Path to the downloaded Task 1 TRAINING set"
-    )
-    parser.add_argument(
-        "--validation_root",
-        required=True,
-        help="Path to the downloaded Task 1 VALIDATION set"
-    )
+
+    parser.add_argument("--task1_training_root", required=True)
+    parser.add_argument("--task1_validation_root", required=True)
+    parser.add_argument("--task23_training_root", required=True)
+    parser.add_argument("--task23_validation_root", required=True)
+
     parser.add_argument(
         "--output_dir",
         default=None,
@@ -150,8 +159,10 @@ def main():
     args = parser.parse_args()
 
     datasets = build_task1_datasets(
-        args.training_root,
-        args.validation_root
+        args.task1_training_root,
+        args.task1_validation_root,
+        args.task23_training_root,
+        args.task23_validation_root
     )
 
     for split, samples in datasets.items():
