@@ -12,7 +12,7 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.metrics import AUC
 
-# Only needed when splits are generated in memory
+# Needed when generating splits in memory
 from prepare_split_task_1 import build_task1_datasets
 
 
@@ -137,8 +137,16 @@ def main():
     parser.add_argument("--task23_training_root", default=None)
     parser.add_argument("--task23_validation_root", default=None)
 
+    # Training params
     parser.add_argument("--batch_size", type=int, default=4)
     parser.add_argument("--epochs", type=int, default=1)
+
+    # Optional model saving
+    parser.add_argument(
+        "--save_model",
+        default=None,
+        help="Optional path to save the trained model (.keras)"
+    )
 
     args = parser.parse_args()
 
@@ -213,6 +221,14 @@ def main():
         validation_data=val_ds,
         epochs=args.epochs
     )
+
+    # -------------------------------------------------
+    # Optional saving
+    # -------------------------------------------------
+
+    if args.save_model is not None:
+        print(f"💾 Saving model to: {args.save_model}")
+        model.save(args.save_model)
 
     print("✅ Minimal training run completed successfully.")
 
