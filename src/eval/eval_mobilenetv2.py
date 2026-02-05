@@ -6,8 +6,8 @@ import tensorflow as tf
 from sklearn.metrics import roc_auc_score, average_precision_score, roc_curve
 
 from models.mobilenetv2 import load_mobilenetv2
-from preprocessing.spatial import preprocess_spatial
-from preprocessing.frequency import preprocess_frequency
+from src.preprocessing.spatial import preprocess_spatial
+from src.preprocessing.frequency import preprocess_frequency
 
 
 # -------------------------------------------------
