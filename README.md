@@ -38,6 +38,7 @@ that allow users to reconstruct **exactly the same train, validation, and test
 splits** used in the paper, starting from the official UWF4DR dataset releases.
 
 Information about dataset usage and directory structure is provided in:
+
 - `data/README.md`
 
 ---
@@ -56,6 +57,7 @@ This includes:
 - and explainability analyses.
 
 Python dependencies for the CNN-based models are listed in:
+
 - `requirements/cnn.txt`
 
 ---
