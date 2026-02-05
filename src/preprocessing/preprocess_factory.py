@@ -1,27 +1,41 @@
 from src.preprocessing.spatial import preprocess_spatial
 from src.preprocessing.frequency import preprocess_frequency
 
-from tensorflow.keras.applications.mobilenet_v2 import preprocess_input as mobilenet_preprocess
-from tensorflow.keras.applications.resnet import preprocess_input as resnet_preprocess
+# MobileNetV2 preprocessing (Keras)
+from tensorflow.keras.applications.mobilenet_v2 import (
+    preprocess_input as mobilenet_preprocess
+)
+
+# ResNet18 preprocessing (classification-models-keras)
+from classification_models.tfkeras import Classifiers
+_, resnet18_preprocess = Classifiers.get("resnet18")
 
 
 def get_preprocess_fn(domain, backbone):
     """
-    Returns a preprocessing function adapted to the
-    input domain (spatial / frequency) and CNN backbone.
+    Returns a preprocessing function adapted to:
+    - domain: spatial | frequency
+    - backbone: mobilenetv2 | resnet18
     """
 
     if domain == "spatial":
+
         if backbone == "mobilenetv2":
-            base_preprocess = mobilenet_preprocess
+            imagenet_preprocess = mobilenet_preprocess
+
         elif backbone == "resnet18":
-            base_preprocess = resnet_preprocess
+            imagenet_preprocess = resnet18_preprocess
+
         else:
             raise ValueError(f"Unsupported backbone: {backbone}")
 
         def preprocess(img, target_size):
+            # Crop + resize + color normalization
             img = preprocess_spatial(img, target_size)
-            img = base_preprocess(img)
+
+            # Backbone-specific ImageNet preprocessing
+            img = imagenet_preprocess(img)
+
             return img
 
         return preprocess
