@@ -17,7 +17,7 @@ This repository follows standard reproducibility practices for medical imaging a
 
 ## 1. Experimental Overview
 
-The experiments are conducted on the **UWF4DR dataset** using ultra-widefield fundus images. Three binary classification tasks are addressed:
+The experiments are conducted using the **UWF4DR dataset**, composed of ultra-widefield (UWF) fundus images. Three binary classification tasks are addressed:
 
 - **Task 1 – Image Quality Assessment**: Gradable vs. Ungradable images  
 - **Task 2 – Referable Diabetic Retinopathy (RDR)**: Non-referable vs. Referable DR  
@@ -59,23 +59,32 @@ Exact numerical reproducibility may vary slightly due to hardware and software d
 
 ---
 
-## 4. Dataset Access and Label Handling
+## 4. Dataset Origin and Access
 
-The **UWF4DR dataset** was originally released in the context of the official **UWF4DR Challenge**, organized in conjunction with the **MICCAI conference**.
+The data used in this work originate from the **UWF4DR Challenge**, an official international challenge organized in the context of the **MICCAI conference**.
 
-Access to the dataset is managed by the challenge organizers and is subject to specific licensing and usage agreements. Users must obtain the dataset directly through the official UWF4DR challenge platform:
+The UWF4DR Challenge is hosted on the **CodaLab** platform, which manages dataset access, evaluation protocols, and leaderboard submissions.
 
-👉 **https://uwf4dr.grand-challenge.org/**
+The official competition page is available at:
+
+👉 **https://codalab.lisn.upsaclay.fr/competitions/18605**
+
+Access to the dataset is subject to the terms and conditions defined by the challenge organizers. Users must register on the CodaLab platform and obtain the data directly through the official competition interface.
 
 This repository is **not affiliated** with the organization of the challenge and does not host or redistribute any part of the dataset.
 
 ---
 
-### 4.1 Handling of Annotations and Licensing Constraints
+## 4.1 Handling of Annotations and Licensing Constraints
 
-Due to dataset licensing constraints, official UWF4DR annotations are **not redistributed** in this repository.
+Due to dataset licensing constraints imposed by the UWF4DR Challenge, official annotations and ground-truth labels are **not redistributed** in this repository.
 
-Instead, this repository provides **split definition files** (located in `data/splits/`) and **dataset preparation scripts** that allow users to reconstruct **exactly the same train, validation, and test splits** used in the paper, starting from the officially released datasets.
+Instead, this repository provides:
+
+- **split definition files** (located in `data/splits/`), and  
+- **dataset preparation scripts**,
+
+which allow users to reconstruct **exactly the same train, validation, and test splits** used in the paper, starting from the officially downloaded datasets.
 
 The split CSV files included in the repository:
 
@@ -86,12 +95,12 @@ The split CSV files included in the repository:
 
 Final labels are obtained locally by the user by combining:
 
-- the official UWF4DR ground-truth CSV files, and  
-- the split definitions provided in this repository.
+- the official UWF4DR ground-truth CSV files provided with the dataset, and  
+- the split definitions included in this repository.
 
 This design ensures:
 
-- compliance with dataset licensing terms,  
+- compliance with the UWF4DR Challenge licensing terms,  
 - no redistribution of sensitive medical annotations,  
 - and full reproducibility of the experimental protocol.
 
