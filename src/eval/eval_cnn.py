@@ -6,8 +6,7 @@ import tensorflow as tf
 from sklearn.metrics import roc_auc_score, average_precision_score, roc_curve
 
 from src.models.cnn_loader import load_cnn_model
-from src.preprocessing.spatial import preprocess_spatial
-from src.preprocessing.frequency import preprocess_frequency
+from src.preprocessing.preprocess_factory import get_preprocess_fn
 
 
 # -------------------------------------------------
