@@ -1,4 +1,3 @@
-
 import os
 import argparse
 import pandas as pd
@@ -13,14 +12,13 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.metrics import AUC
 
-
-# Optional import if splits are generated in memory
+# Only needed when splits are generated in memory
 from prepare_split_task_1 import build_task1_datasets
 
 
-# -------------------------------------------------
+# =================================================
 # Image preprocessing utilities
-# -------------------------------------------------
+# =================================================
 
 def center_crop(image, crop_size=(800, 800)):
     h, w, _ = image.shape
@@ -51,25 +49,34 @@ def color_normalization(image, blur_radius=9, amplification_factor=4, offset=128
     return Image.merge("RGB", (r, g, b))
 
 
+def _preprocess_numpy(img):
+    img = Image.fromarray(img)
+    img = np.array(img)
+
+    img = center_crop(img, (800, 800))
+    img = tf.image.resize(img, (448, 448)).numpy().astype(np.uint8)
+
+    img = Image.fromarray(img)
+    img = color_normalization(img)
+
+    img = np.asarray(img)
+    img = preprocess_input(img)
+
+    return img.astype(np.float32)
+
+
 def load_and_preprocess(path, label):
     img = tf.io.read_file(path)
     img = tf.image.decode_jpeg(img, channels=3)
-    img = tf.numpy_function(_preprocess_numpy, [img], tf.float32)
+
+    img = tf.numpy_function(
+        _preprocess_numpy,
+        [img],
+        Tout=tf.float32
+    )
     img.set_shape((448, 448, 3))
-    return img, label
 
-
-def _preprocess_numpy(img):
-    img = img.numpy()
-    img = Image.fromarray(img)
-    img = np.array(img)
-    img = center_crop(img, (800, 800))
-    img = tf.image.resize(img, (448, 448)).numpy()
-    img = Image.fromarray(img.astype(np.uint8))
-    img = color_normalization(img)
-    img = np.asarray(img)
-    img = preprocess_input(img)
-    return img.astype(np.float32)
+    return img, tf.cast(label, tf.float32)
 
 
 def augment(image, label):
@@ -81,9 +88,9 @@ def augment(image, label):
     return image, label
 
 
-# -------------------------------------------------
+# =================================================
 # Model
-# -------------------------------------------------
+# =================================================
 
 def build_model():
     base = MobileNetV2(
@@ -112,43 +119,71 @@ def build_model():
     return model
 
 
-# -------------------------------------------------
+# =================================================
 # Main
-# -------------------------------------------------
+# =================================================
 
 def main():
     parser = argparse.ArgumentParser(
         description="Minimal training script for Task 1 using MobileNetV2."
     )
 
+    # Option A: use saved CSV splits
     parser.add_argument("--splits_dir", default=None)
 
+    # Option B: generate splits in memory
     parser.add_argument("--task1_training_root", default=None)
     parser.add_argument("--task1_validation_root", default=None)
     parser.add_argument("--task23_training_root", default=None)
     parser.add_argument("--task23_validation_root", default=None)
 
-    parser.add_argument("--batch_size", type=int, default=8)
-    parser.add_argument("--epochs", type=int, default=2)
+    parser.add_argument("--batch_size", type=int, default=4)
+    parser.add_argument("--epochs", type=int, default=1)
 
     args = parser.parse_args()
 
+    # -------------------------------------------------
     # Load datasets
-    if args.splits_dir:
-        datasets = {}
-        for split in ["train", "validation"]:
-            df = pd.read_csv(os.path.join(args.splits_dir, f"{split}.csv"))
-            datasets[split] = list(zip(df.image_path, df.label))
+    # -------------------------------------------------
+
+    if args.splits_dir is not None:
+        print("📂 Loading dataset splits from CSV files")
+
+        train_df = pd.read_csv(os.path.join(args.splits_dir, "train.csv"))
+        val_df = pd.read_csv(os.path.join(args.splits_dir, "validation.csv"))
+
+        train_paths = train_df["image_path"].tolist()
+        train_labels = train_df["label"].tolist()
+
+        val_paths = val_df["image_path"].tolist()
+        val_labels = val_df["label"].tolist()
+
     else:
+        print("🧠 Generating dataset splits in memory")
+
         datasets = build_task1_datasets(
             args.task1_training_root,
             args.task1_validation_root,
             args.task23_training_root,
-            args.task23_validation_root
+            args.task23_validation_root,
         )
 
-    # Build tf.data pipelines
-    train_ds = tf.data.Dataset.from_tensor_slices(datasets["train"])
+        train_paths, train_labels = zip(*datasets["train"])
+        val_paths, val_labels = zip(*datasets["validation"])
+
+        train_paths = list(train_paths)
+        train_labels = list(train_labels)
+        val_paths = list(val_paths)
+        val_labels = list(val_labels)
+
+    print(f"Train samples: {len(train_paths)}")
+    print(f"Validation samples: {len(val_paths)}")
+
+    # -------------------------------------------------
+    # tf.data pipelines
+    # -------------------------------------------------
+
+    train_ds = tf.data.Dataset.from_tensor_slices((train_paths, train_labels))
     train_ds = (
         train_ds
         .map(load_and_preprocess, num_parallel_calls=tf.data.AUTOTUNE)
@@ -158,13 +193,17 @@ def main():
         .prefetch(tf.data.AUTOTUNE)
     )
 
-    val_ds = tf.data.Dataset.from_tensor_slices(datasets["validation"])
+    val_ds = tf.data.Dataset.from_tensor_slices((val_paths, val_labels))
     val_ds = (
         val_ds
         .map(load_and_preprocess, num_parallel_calls=tf.data.AUTOTUNE)
         .batch(args.batch_size)
         .prefetch(tf.data.AUTOTUNE)
     )
+
+    # -------------------------------------------------
+    # Train
+    # -------------------------------------------------
 
     model = build_model()
     model.summary()
@@ -175,7 +214,7 @@ def main():
         epochs=args.epochs
     )
 
-    print("✅ Minimal training run completed.")
+    print("✅ Minimal training run completed successfully.")
 
 
 if __name__ == "__main__":
