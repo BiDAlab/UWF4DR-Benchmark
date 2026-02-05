@@ -5,9 +5,9 @@ reproducibility resources associated with the paper:
 
 **Exploring Deep Learning Methods and Ultra-Widefield Imaging for Diabetic Retinopathy**
 
-The study investigates state-of-the-art deep learning approaches for the
-analysis of ultra-widefield (UWF) fundus images across three clinically relevant
-tasks:
+The study investigates state-of-the-art deep learning approaches for the analysis
+of ultra-widefield (UWF) fundus images across three clinically relevant tasks:
+
 - image quality assessment,
 - referable diabetic retinopathy (RDR) identification,
 - diabetic macular edema (DME) identification.
@@ -30,11 +30,15 @@ The repository is organized as follows:
 
 ## Dataset Availability
 
-Due to data protection and licensing restrictions, the original UWF fundus
-images are **not included** in this repository.
+Due to data protection and licensing restrictions, the original UWF fundus images
+and official annotations are **not included** in this repository.
 
-Information about dataset usage and experimental splits is provided in
-`data/README.md`.
+Instead, this repository provides fixed split definition files and Python scripts
+that allow users to reconstruct **exactly the same train, validation, and test
+splits** used in the paper, starting from the official UWF4DR dataset releases.
+
+Information about dataset usage and directory structure is provided in:
+- `data/README.md`
 
 ---
 
@@ -43,8 +47,16 @@ Information about dataset usage and experimental splits is provided in
 Detailed instructions to reproduce the experimental protocol and results are
 available in:
 
-[docs/reproducibility.md](docs/reproducibility.md)
+- `docs/reproducibility.md`
 
+This includes:
+- dataset preparation and split reconstruction,
+- preprocessing pipelines,
+- training and evaluation procedures,
+- and explainability analyses.
+
+Python dependencies for the CNN-based models are listed in:
+- `requirements/cnn.txt`
 
 ---
 
