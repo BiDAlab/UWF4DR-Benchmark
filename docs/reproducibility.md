@@ -61,7 +61,7 @@ Exact numerical reproducibility may vary slightly due to hardware and software d
 
 ## 4. Dataset Origin and Access
 
-The data used in this work originate from the **UWF4DR Challenge**, an official international challenge organized in the context of the **MICCAI conference**.
+The data used in this work originate from the **UWF4DR Challenge**, an official international challenge organized in the context of the **MICCAI 2024 conference**.
 
 The UWF4DR Challenge is hosted on the **CodaLab** platform, which manages dataset access, evaluation protocols, and leaderboard submissions.
 
