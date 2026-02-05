@@ -113,4 +113,10 @@ Different model families were trained using separate Python environments to ensu
 
 The exact requirements for each model family are provided in the `requirements/` directory.
 
+Some Python dependencies are installed directly from GitHub repositories. Therefore, **Git must be available in the system** before installing the requirements.
+
+If using conda, Git can be installed with:
+
+conda install -c conda-forge git
+
 This design choice avoids version conflicts between architectures while preserving full reproducibility of the experimental protocol.
