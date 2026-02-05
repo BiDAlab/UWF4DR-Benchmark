@@ -97,10 +97,10 @@ def main():
     # Domain-specific preprocessing
     # -------------------------------------------------
 
-    if args.domain == "spatial":
-        preprocess_fn = preprocess_spatial
-    else:
-        preprocess_fn = preprocess_frequency
+    preprocess_fn = get_preprocess_fn(
+        domain=args.domain,
+        backbone=args.backbone,
+    )
 
     # -------------------------------------------------
     # Load data
