@@ -66,6 +66,13 @@ def main():
         help="Input domain",
     )
     parser.add_argument(
+    "--backbone",
+    type=str,
+    default="mobilenetv2",
+    choices=["mobilenetv2", "resnet18"],
+    help="CNN backbone architecture"
+    )
+    parser.add_argument(
         "--model",
         required=True,
         help="Path to trained model (.keras)",
