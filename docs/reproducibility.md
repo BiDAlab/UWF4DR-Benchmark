@@ -114,6 +114,3 @@ Different model families were trained using separate Python environments to ensu
 The exact requirements for each model family are provided in the `requirements/` directory.
 
 This design choice avoids version conflicts between architectures while preserving full reproducibility of the experimental protocol.
-
-This design choice avoids version conflicts between architectures while
-preserving full reproducibility of the experimental protocol.
