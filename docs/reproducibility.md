@@ -76,7 +76,7 @@ Due to dataset licensing constraints imposed by the UWF4DR Challenge, official a
 Instead, this repository provides:
 
 - **split definition files** (located in `data/splits/`), and  
-- **dataset preparation scripts** (located in `src`),
+- **dataset preparation scripts** (located in `src/prepare_splits`),
 
 which allow users to reconstruct **exactly the same train, validation, and test splits** used in the paper, starting from the officially downloaded datasets.
 
@@ -104,9 +104,9 @@ This design ensures:
 
 One script is provided per task to reconstruct the exact dataset partitions used in the paper:
 
-- **Task 1 – Image Quality Assessment**: `prepare_split_task_1.py`  
-- **Task 2 – RDR Identification**: `prepare_split_task_2.py`  
-- **Task 3 – DME Identification**: `prepare_split_task_3.py`  
+- **Task 1 – Image Quality Assessment**: `src/prepare_splits/prepare_split_task_1.py`  
+- **Task 2 – RDR Identification**: `src/prepare_splits/prepare_split_task_2.py`  
+- **Task 3 – DME Identification**: `src/prepare_splits/prepare_split_task_3.py`  
 
 Each script:
 
