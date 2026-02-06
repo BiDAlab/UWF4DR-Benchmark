@@ -37,6 +37,7 @@ reproducible procedure.
 The exact split definitions used in the paper are provided as CSV files,
 specifying the image identifiers assigned to each subset.
 
+---
 
 ## Split Generation
 
