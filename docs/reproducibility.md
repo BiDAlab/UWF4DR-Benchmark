@@ -59,9 +59,7 @@ The repository is organized as follows:
 
 The data used in this work originate from the **UWF4DR Challenge**, an official international challenge organized in the context of the **MICCAI 2024 conference**.
 
-The UWF4DR Challenge is hosted on the **CodaLab** platform, which manages dataset access, evaluation protocols, and leaderboard submissions.
-
-The official competition page is available at:
+The UWF4DR Challenge is hosted on the **CodaLab** platform, which manages dataset access, evaluation protocols, and leaderboard submissions. The official competition page is available at:
 
 👉 **https://codalab.lisn.upsaclay.fr/competitions/18605**
 
