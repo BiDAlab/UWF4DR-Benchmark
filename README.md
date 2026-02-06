@@ -38,7 +38,7 @@ described in the paper. Specifically, it provides:
 - fixed experimental split definitions used in the paper,
 - scripts to reconstruct the exact train, validation, and test splits from the official dataset,
 - preprocessing pipelines for spatial and frequency domains,
-- evaluation scripts for convolutional neural network (CNN) models.
+- evaluation scripts for deep learning models.
 
 ---
 
