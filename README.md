@@ -20,7 +20,8 @@ The experiments reported in the paper are based on the **UWF4DR (Ultra-Widefield
 of MICCAI 2024.
 
 The dataset is distributed by the challenge organizers and must be obtained
-separately. Official information and access instructions are available at:
+separately. Access to the data requires registration to the challenge platform.
+Official information and access instructions are available at:
 
 https://codalab.lisn.upsaclay.fr/competitions/18605
 
