@@ -37,13 +37,10 @@ The preprocessing code follows these principles:
 
 - **Shared preprocessing logic**  
   The same core preprocessing operations are applied across tasks and model
-  families. Task-specific and model-specific requirements (such as input image
-  size) are handled externally by the evaluation scripts.
-
-- **Separation between preprocessing logic and configuration**  
-  Preprocessing functions implement domain-specific transformations (spatial or
-  frequency), while parameters such as target resolution are defined at the
-  evaluation stage.
+  families. Domain-specific transformations (spatial or frequency) are
+  implemented within the preprocessing modules, while task- and model-specific
+  requirements (such as input image resolution) are defined and handled by the
+  evaluation scripts.
 
 - **Explicit domain separation**  
   Spatial-domain and frequency-domain preprocessing pipelines are implemented
