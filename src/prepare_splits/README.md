@@ -54,10 +54,12 @@ folders.
 Each script writes the prepared split files to the directory specified by the
 `--output_dir` argument:
 
+~~~
 output_dir/
 ├── train.csv
 ├── validation.csv
 └── test.csv
+~~~
 
 
 Each output CSV contains:
