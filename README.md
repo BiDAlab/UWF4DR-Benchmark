@@ -3,7 +3,7 @@
 This repository provides the experimental protocol, model configurations, and
 reproducibility resources associated with the paper:
 
-**Exploring Deep Learning Methods and Ultra-Widefield Imaging for Diabetic Retinopathy**
+**Exploring Deep Learning and Ultra-Widefield Imaging for Diabetic Retinopathy and Macular Edema**
 
 The study investigates state-of-the-art deep learning approaches for the analysis
 of ultra-widefield (UWF) fundus images across three clinically relevant tasks:
