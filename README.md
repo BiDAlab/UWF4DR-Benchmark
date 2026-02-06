@@ -4,6 +4,7 @@ This repository provides the experimental protocol, data split definitions, and
 evaluation code corresponding to the study presented in the paper:
 
 **Exploring Deep Learning and Ultra-Widefield Imaging for Diabetic Retinopathy and Macular Edema**  
+(Submitted to IEEE CAI 2026)
 
 The study investigates deep learning approaches for the analysis of ultra-widefield
 (UWF) fundus images across three clinically relevant tasks:
@@ -14,18 +15,36 @@ The study investigates deep learning approaches for the analysis of ultra-widefi
 
 ---
 
+## Dataset Source
+
+The experiments reported in the paper are based on the **UWF4DR Challenge dataset**
+(Ultra-Widefield Imaging for Diabetic Retinopathy), originally released in the context
+of MICCAI 2024.
+
+The dataset is distributed by the challenge organizers and must be obtained
+separately. Official information and access instructions are available at:
+
+https://codalab.lisn.upsaclay.fr/competitions/18605
+
+---
+
 ## Purpose of This Repository
 
-Due to licensing and data protection restrictions, the ultra-widefield fundus images
-used in the study cannot be redistributed. This repository therefore focuses on
-**reproducibility of the experimental protocol**, rather than data hosting.
+Due to licensing and data protection restrictions associated with the UWF4DR dataset,
+the original ultra-widefield fundus images cannot be redistributed.
+
+This repository therefore focuses on **reproducibility of the experimental protocol**
+described in the paper, rather than on data hosting.
 
 Specifically, it provides:
 
 - fixed experimental split definitions used in the paper,
-- scripts to reconstruct the exact train, validation, and test splits,
+- scripts to reconstruct the exact train, validation, and test splits from the official dataset,
 - preprocessing pipelines for spatial and frequency domains,
 - evaluation scripts for convolutional neural network (CNN) models.
+
+All provided code has been validated from a clean environment using dummy models to
+ensure that the full pipeline can be executed by external users.
 
 ---
 
@@ -49,18 +68,9 @@ The repository is organized as follows:
 
 ---
 
-## Dataset Source and Split Reconstruction
+## Split Reconstruction and Usage
 
-The experiments in this repository are based on the **UWF4DR Challenge dataset**
-(Ultra-Widefield Imaging for Diabetic Retinopathy), originally released in the context
-of MICCAI 2024.
-
-The dataset is distributed by the challenge organizers and must be obtained
-separately. Official information and access instructions are available at:
-
-https://codalab.lisn.upsaclay.fr/competitions/18605
-
-Once authorized access to the dataset is obtained, users can reproduce the exact
+Once authorized access to the UWF4DR dataset is obtained, users can reproduce the exact
 experimental splits used in the paper by running the provided
 `prepare_split_task_x.py` scripts.
 
@@ -104,4 +114,3 @@ Trained models used in the paper will be hosted separately on institutional serv
 ## License and Citation
 
 License and citation information will be added upon paper acceptance.
-
