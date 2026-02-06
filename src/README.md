@@ -39,7 +39,7 @@ The code in this directory follows these principles:
 
 The `src/` directory is organized as follows:
 
-- `prepare_splits`  
+- `prepare_splits/`  
   Scripts used to reconstruct the exact train, validation, and test splits
   employed in the paper for each task, starting from the official UWF4DR dataset.
 
