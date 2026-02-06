@@ -14,8 +14,8 @@ consistently across all tasks and model architectures.
 Two complementary image representations are considered in the experiments:
 
 - **Spatial domain**  
-  Standard RGB ultra-widefield fundus images after geometric resizing and
-  intensity normalization.
+  Standard RGB ultra-widefield fundus images after resizing and
+  color normalization.
 
 - **Frequency domain**  
   Frequency-based representations derived from the magnitude of the
