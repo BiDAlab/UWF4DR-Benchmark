@@ -72,7 +72,7 @@ prepared_taskX/
 Each CSV file specifies the image identifiers and labels assigned to the
 corresponding subset.
 
-These generated files are then used directly by the training and evaluation
+These generated files are then used directly by the evaluation
 scripts provided in the repository.
 
 ---
