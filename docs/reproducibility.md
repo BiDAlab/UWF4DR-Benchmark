@@ -2,7 +2,7 @@
 
 This document describes how to reproduce the experimental protocol and results reported in the paper:
 
-**Exploring Deep Learning Methods and Ultra-Widefield Imaging for Diabetic Retinopathy**
+**Exploring Deep Learning and Ultra-Widefield Imaging for Diabetic Retinopathy and Macular Edema**
 
 The goal of this guide is to provide a clear and complete description of:
 
