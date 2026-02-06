@@ -44,17 +44,18 @@ specifying the image identifiers assigned to each subset.
 After downloading the official UWF4DR dataset, users **must generate the same
 experimental splits used in the paper by executing the provided scripts**:
 
-src/prepare_split_task_1.py
-src/prepare_split_task_2.py
-src/prepare_split_task_3.py
+- `src/prepare_split_task_1.py`
+- `src/prepare_split_task_2.py`
+- `src/prepare_split_task_3.py`
 
 Each script automatically:
 - reads the original dataset structure,
 - applies the authors’ experimental protocol,
 - generates CSV files defining the train, validation, and test subsets.
 
-These CSV files are the **only authoritative definition of the splits** used
-in all experiments.
+The generated CSV files explicitly define which images belong to each subset and
+constitute the reference split definitions used throughout all experiments in
+this repository.
 
 ---
 
