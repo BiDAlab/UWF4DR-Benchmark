@@ -64,11 +64,6 @@ this repository.
 After running the corresponding `prepare_split_task_X.py` script, the output
 directory will contain:
 
-- prepared_taskX
-  - train.csv
-  - validation.csv
-  - test.csv
-
 ~~~
 prepared_taskX/
 ├── train.csv
