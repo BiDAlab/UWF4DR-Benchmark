@@ -35,13 +35,20 @@ The experimental protocol described in the paper considers multiple backbone arc
 
 The repository is organized as follows:
 
-- `configs/`: configuration files for experiments and models  
-- `data/`: placeholder directory for dataset organization (data not included)  
-- `docs/`: documentation files, including this reproducibility guide  
-- `experiments/`: experiment definitions and execution scripts  
-- `models/`: model definitions and architecture wrappers  
-- `results/`: output metrics, logs, and visualizations (excluding large files)  
-- `src/`: source code for data processing, training, evaluation, and explainability  
+- `data/`  
+  Dataset documentation and fixed split definition files employed in the paper.  
+  **No image data is included.**
+
+- `src/`  
+  Python source code for dataset split preparation, preprocessing, and model evaluation.
+  Model architecture definitions are included, but no trained model weights are stored.
+  Pretrained models used in the paper are hosted separately on institutional servers (BiDA Lab).
+
+- `requirements/`  
+  Dependency specifications for the different model families used in the study.
+
+- `docs/`  
+  Additional documentation related to reproducibility and the experimental protocol.
 
 ---
 
