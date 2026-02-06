@@ -39,7 +39,7 @@ The code in this directory follows these principles:
 
 The `src/` directory is organized as follows:
 
-- `prepare_split_task_*.py`  
+- `prepare_split_task_x.py`  
   Scripts used to reconstruct the exact train, validation, and test splits
   employed in the paper for each task, starting from the official UWF4DR dataset.
 
@@ -92,7 +92,7 @@ scripts.
 Typical usage of the code in `src/` follows this workflow:
 
 1. Obtain authorized access to the official UWF4DR dataset.
-2. Reconstruct the experimental splits using the `prepare_split_task_*.py` scripts.
+2. Reconstruct the experimental splits using the `prepare_split_task_x.py` scripts.
 3. Download pretrained model weights from the external hosting location.
 4. Evaluate the models using the scripts provided in `eval/`.
 
