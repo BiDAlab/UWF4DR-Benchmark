@@ -105,7 +105,7 @@ This design ensures:
 One script is provided per task to reconstruct the exact dataset partitions used in the paper:
 
 - **Task 1 – Image Quality Assessment**: `prepare_split_task_1.py`  
-- **Task 2 – Referable DR Identification**: `prepare_split_task_2.py`  
+- **Task 2 – RDR Identification**: `prepare_split_task_2.py`  
 - **Task 3 – DME Identification**: `prepare_split_task_3.py`  
 
 Each script:
