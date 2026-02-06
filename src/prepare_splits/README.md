@@ -5,7 +5,7 @@ train, validation, and test splits employed in the associated paper.
 
 The experimental split assignments (i.e., which image belongs to train,
 validation, or test) are defined by the authors and are provided in the
-repository under `data/splits/` as CSV files containing **image identifiers**
+repository under `data/splits/` as CSV files containing image identifiers
 and their split assignment.
 
 The scripts in this directory combine:
