@@ -1,4 +1,4 @@
-# Dataset Split Preparation (`prepare_splits/`)
+# Dataset Split Preparation
 
 This directory contains the scripts used to reconstruct the exact experimental
 train, validation, and test splits employed in the associated paper.
