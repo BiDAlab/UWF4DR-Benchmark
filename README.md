@@ -4,7 +4,6 @@ This repository provides the experimental protocol, data split definitions, and
 evaluation code corresponding to the study presented in the paper:
 
 **Exploring Deep Learning and Ultra-Widefield Imaging for Diabetic Retinopathy and Macular Edema**  
-(Submitted to IEEE CAI 2026)
 
 The study investigates deep learning approaches for the analysis of ultra-widefield
 (UWF) fundus images across three clinically relevant tasks:
