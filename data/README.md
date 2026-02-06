@@ -66,7 +66,7 @@ directory will contain:
 
 prepared_taskX/
 ├── train.csv
-├── val.csv
+├── validation.csv
 └── test.csv
 
 Each CSV file specifies the image identifiers and labels assigned to the
