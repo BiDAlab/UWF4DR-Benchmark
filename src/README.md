@@ -91,7 +91,7 @@ scripts.
 Typical usage of the code in `src/` follows this workflow:
 
 1. Obtain authorized access to the official UWF4DR dataset.
-2. Reconstruct the experimental splits using the scripts provided in `prepare_splits`.
+2. Reconstruct the experimental splits using the scripts provided in `prepare_splits/`.
 3. Download pretrained model weights from the external hosting location.
 4. Evaluate the models using the scripts provided in `eval/`.
 
