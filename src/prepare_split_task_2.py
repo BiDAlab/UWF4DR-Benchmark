@@ -48,8 +48,10 @@ def find_image(image_id, search_roots):
     """
 
     for root in search_roots:
-        for subfolder in [("1. Images", "1. Training"),
-                          ("1. Images", "2. Validation")]:
+        for subfolder in [
+            ("1. Images", "1. Training"),
+            ("1. Images", "2. Validation"),
+        ]:
             candidate = os.path.join(root, *subfolder, image_id)
             if os.path.exists(candidate):
                 return candidate
@@ -77,7 +79,7 @@ def build_task2_datasets(task23_training_root, task23_validation_root):
         annotations,
         left_on="image_id",
         right_on="image",
-        how="left"
+        how="left",
     ).drop(columns=["image"])
 
     # Identify label column for Task 2 (RDR)
@@ -105,7 +107,9 @@ def build_task2_datasets(task23_training_root, task23_validation_root):
 
     for _, row in merged.iterrows():
         image_path = find_image(row["image_id"], search_roots)
-        datasets[row["split"]].append((image_path, int(row[rdr_col])))
+        datasets[row["split"]].append(
+            (image_path, int(row[rdr_col]))
+        )
 
     return datasets
 
@@ -125,7 +129,8 @@ def main():
     parser = argparse.ArgumentParser(
         description=(
             "Prepare Task 2 (RDR Identification) dataset splits using "
-            "official UWF4DR annotations."
+            "official UWF4DR annotations.\n\n"
+            "The generated CSV files are REQUIRED for model evaluation."
         )
     )
 
@@ -134,8 +139,8 @@ def main():
 
     parser.add_argument(
         "--output_dir",
-        default=None,
-        help="Optional directory to save the prepared datasets as CSV files"
+        required=True,
+        help="Directory where the generated train/validation/test CSV files will be saved",
     )
 
     args = parser.parse_args()
@@ -148,9 +153,8 @@ def main():
     for split, samples in datasets.items():
         print(f"{split}: {len(samples)} samples")
 
-    if args.output_dir:
-        save_datasets(datasets, args.output_dir)
-        print(f"📁 Datasets saved to: {args.output_dir}")
+    save_datasets(datasets, args.output_dir)
+    print(f"📁 Dataset splits saved to: {args.output_dir}")
 
 
 if __name__ == "__main__":
