@@ -8,8 +8,7 @@ The goal of this guide is to provide a clear and complete description of:
 
 - the dataset usage and experimental splits,
 - the preprocessing pipelines,
-- the training and evaluation protocols,
-- and the explainability analyses.
+- and the evaluation protocols.
 
 This repository follows standard reproducibility practices for medical imaging and deep learning research. Due to dataset licensing restrictions, raw data and trained model weights are not directly included in the repository.
 
