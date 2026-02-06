@@ -67,7 +67,7 @@ The repository is organized as follows:
 
 Once authorized access to the UWF4DR dataset is obtained, users can reproduce the exact
 experimental splits used in the paper by running the provided
-`prepare_split_task_x.py` scripts.
+`prepare_splits/` scripts.
 
 Detailed information about dataset structure and split reconstruction is provided in:
 
