@@ -55,7 +55,6 @@ The repository is organized as follows:
   Model architecture definitions are included, but no trained model weights are stored.
   Pretrained models used in the paper are hosted separately on institutional servers (BiDA Lab).
 
-
 - `requirements/`  
   Dependency specifications for the different model families used in the study.
 
