@@ -67,6 +67,10 @@ Two input domains are supported:
 Task-specific and model-specific input requirements (such as image resolution)
 are defined at evaluation time.
 
+At present, the evaluation code focuses on convolutional neural network (CNN)
+models. Additional evaluation scripts for other model families described in the
+paper (e.g., ViT-B/16 and RETFound) will be incorporated in subsequent updates.
+
 ---
 
 ## Metrics
