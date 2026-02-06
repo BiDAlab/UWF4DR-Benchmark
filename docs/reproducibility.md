@@ -25,7 +25,7 @@ The experiments are conducted using the **UWF4DR dataset**, composed of ultra-wi
 For each task, models are trained and evaluated using two image representations:
 
 - Spatial domain (RGB images)  
-- Frequency domain (magnitude of the 2D Discrete Fourier Transform)
+- Frequency domain (magnitude of the 2D Discrete Fourier Transform, with values clipped at the 99th percentile)
 
 The experimental protocol includes multiple backbone architectures, feature-level fusion strategies, and explainability analyses based on Grad-CAM.
 
