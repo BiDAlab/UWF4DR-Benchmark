@@ -22,7 +22,7 @@ The code in this directory follows these principles:
   preprocessing steps.
 
 - **No data hosting**:  
-  Raw images and official annotations are never stored or redistributed here. Image paths are generated locally from the the   user’s downloaded UWF4DR dataset by the split preparation scripts.
+  Raw images and official annotations are never stored or redistributed here. Image paths are generated locally from the     user’s downloaded UWF4DR dataset by the split preparation scripts.
 
 - **Separation of concerns**:  
   Dataset preparation, preprocessing, model definitions, and evaluation are
