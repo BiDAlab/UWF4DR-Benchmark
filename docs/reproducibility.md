@@ -25,7 +25,7 @@ The experiments are conducted using the **UWF4DR dataset**, composed of ultra-wi
 - **Task 2 – Referable Diabetic Retinopathy (RDR) Identification**: Non-referable vs. Referable DR  
 - **Task 3 – Diabetic Macular Edema (DME) Identification**: Absence vs. Presence of DME  
 
-For each task, models are trained and evaluated using two image representations:
+For each task, models were trained and evaluated using two image representations:
 
 - Spatial domain (RGB images)  
 - Frequency domain (magnitude of the 2D Discrete Fourier Transform, with values clipped at the 99th percentile)
