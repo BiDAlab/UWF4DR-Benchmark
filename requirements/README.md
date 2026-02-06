@@ -8,7 +8,8 @@ different model families rely on distinct and potentially incompatible software
 stacks.
 
 - `cnn.txt`  
-  Dependencies for convolutional neural network (CNN) models.
+  Dependencies for convolutional neural network (CNN) models. The CNN architectures used in this study include MobileNetV2 and
+  ResNet18.
 
 - `vit.txt`  
   Dependencies for vision transformer (ViT) models.
