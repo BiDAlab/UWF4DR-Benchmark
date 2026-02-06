@@ -33,9 +33,7 @@ Due to licensing and data protection restrictions associated with the UWF4DR dat
 the original ultra-widefield fundus images cannot be redistributed.
 
 This repository therefore focuses on **reproducibility of the experimental protocol**
-described in the paper, rather than on data hosting.
-
-Specifically, it provides:
+described in the paper. Specifically, it provides:
 
 - fixed experimental split definitions used in the paper,
 - scripts to reconstruct the exact train, validation, and test splits from the official dataset,
