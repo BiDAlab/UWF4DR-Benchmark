@@ -51,8 +51,10 @@ The repository is organized as follows:
   **No image data is included.**
 
 - `src/`  
-  Python source code for dataset split preparation, preprocessing, and model evaluation.  
-  Model architecture definitions are included, but **no trained model weights** are stored.
+  Python source code for dataset split preparation, preprocessing, and model evaluation.
+  Model architecture definitions are included, but no trained model weights are stored.
+  Pretrained models used in the paper are hosted separately on institutional servers (BiDA Lab).
+
 
 - `requirements/`  
   Dependency specifications for the different model families used in the study.
