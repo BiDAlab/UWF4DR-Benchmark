@@ -16,8 +16,7 @@ The study investigates deep learning approaches for the analysis of ultra-widefi
 
 ## Dataset Source
 
-The experiments reported in the paper are based on the **UWF4DR Challenge dataset**
-(Ultra-Widefield Imaging for Diabetic Retinopathy), originally released in the context
+The experiments reported in the paper are based on the **UWF4DR (Ultra-Widefield Imaging for Diabetic Retinopathy) Challenge dataset**, originally released in the context
 of MICCAI 2024.
 
 The dataset is distributed by the challenge organizers and must be obtained
