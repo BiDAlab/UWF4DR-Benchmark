@@ -113,7 +113,7 @@ Each script:
 - reads the official UWF4DR ground-truth annotations locally,  
 - applies the fixed split definition used in the paper,  
 - resolves the correct image paths from the downloaded datasets,  
-- and optionally saves the resulting splits as CSV files.
+- and saves the resulting splits as CSV files.
 
 **Task-specific considerations:**
 
