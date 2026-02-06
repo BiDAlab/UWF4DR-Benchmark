@@ -22,8 +22,7 @@ The code in this directory follows these principles:
   preprocessing steps.
 
 - **No data hosting**:  
-  Raw images and official annotations are never stored or redistributed here.
-  Image paths are resolved locally from the user’s downloaded UWF4DR dataset.
+  Raw images and official annotations are never stored or redistributed here. Image paths are generated locally from the the   user’s downloaded UWF4DR dataset by the split preparation scripts.
 
 - **Separation of concerns**:  
   Dataset preparation, preprocessing, model definitions, and evaluation are
@@ -96,4 +95,4 @@ Typical usage of the code in `src/` follows this workflow:
 3. Download pretrained model weights from the external hosting location.
 4. Evaluate the models using the scripts provided in `eval/`.
 
-Detailed, step-by-step instructions are provided in the repository documentation.
+Detailed instructions are provided in `docs/reproducibility.md`.
