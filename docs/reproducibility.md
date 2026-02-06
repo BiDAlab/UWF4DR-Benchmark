@@ -76,7 +76,7 @@ Due to dataset licensing constraints imposed by the UWF4DR Challenge, official a
 Instead, this repository provides:
 
 - **split definition files** (located in `data/splits/`), and  
-- **dataset preparation scripts**,
+- **dataset preparation scripts** (located in `src`,
 
 which allow users to reconstruct **exactly the same train, validation, and test splits** used in the paper, starting from the officially downloaded datasets.
 
