@@ -31,18 +31,19 @@ images into these representations in a fully deterministic manner.
 
 The preprocessing code follows these principles:
 
-- **Determinism**  
+- **Deterministic behavior**  
   All preprocessing operations are fixed and non-stochastic to ensure exact
   reproducibility of the evaluation pipeline.
 
-- **Task-agnostic design**  
-  The same preprocessing logic is applied independently of the task
-  (image quality assessment, RDR identification, or DME identification).
+- **Shared preprocessing logic**  
+  The same core preprocessing operations are applied across tasks and model
+  families. Task-specific and model-specific requirements (such as input image
+  size) are handled externally by the evaluation scripts.
 
-- **Model-agnostic design**  
-  Preprocessing is independent of the backbone architecture and can be used
-  with convolutional neural networks, vision transformers, or retinal
-  foundation models.
+- **Separation between preprocessing logic and configuration**  
+  Preprocessing functions implement domain-specific transformations (spatial or
+  frequency), while parameters such as target resolution are defined at the
+  evaluation stage.
 
 - **Explicit domain separation**  
   Spatial-domain and frequency-domain preprocessing pipelines are implemented
