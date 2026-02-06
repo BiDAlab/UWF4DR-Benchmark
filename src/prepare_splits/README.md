@@ -1,12 +1,19 @@
-# Dataset Split Preparation
+# Dataset Split Preparation (`prepare_splits/`)
 
 This directory contains the scripts used to reconstruct the exact experimental
 train, validation, and test splits employed in the associated paper.
 
-The splits are **independently defined by the authors** and do not correspond to
-the official (hidden) test split of the UWF4DR Challenge. They are designed to
-enable full reproducibility of the evaluation protocol outside the competition
-platform.
+The experimental split assignments (i.e., which image belongs to train,
+validation, or test) are defined by the authors and are provided in the
+repository under `data/splits/` as CSV files containing **image identifiers**
+and their split assignment.
+
+The scripts in this directory combine:
+
+- the split definition files in `data/splits/`, and
+- the official UWF4DR ground-truth CSV files distributed with the dataset,
+
+to generate locally usable split files with resolved image paths and task labels.
 
 ---
 
@@ -14,15 +21,12 @@ platform.
 
 The scripts in this directory allow users to:
 
-- reconstruct the same experimental splits used in the paper,
-- starting from the officially downloaded UWF4DR datasets,
+- reproduce the same experimental splits used in the paper,
+- starting from the officially downloaded UWF4DR dataset,
 - while respecting dataset licensing and annotation redistribution constraints.
 
-Each script generates CSV files that explicitly define which images belong to
-the training, validation, and test subsets.
-
-These CSV files constitute the **sole reference definition** of the experimental
-splits used throughout the repository.
+In particular, the scripts materialize the experimental protocol by producing
+CSV files that can be consumed directly by the evaluation code.
 
 ---
 
@@ -39,27 +43,29 @@ One script is provided per task:
 - **Task 3 – Diabetic Macular Edema (DME) Identification**  
   `prepare_split_task_3.py`
 
-Each script applies the same fixed split definition reported in the paper and
-resolves the correct image paths from the locally available UWF4DR dataset
+Each script applies the corresponding split definition file from `data/splits/`
+and resolves the correct image paths from the locally available UWF4DR dataset
 folders.
 
 ---
 
 ## Output
 
-When executed successfully, each script produces the following files:
+Each script writes the prepared split files to the directory specified by the
+`--output_dir` argument:
 
-train.csv
-validation.csv
-test.csv
+output_dir/
+├── train.csv
+├── validation.csv
+└── test.csv
 
 
-Each CSV file contains:
+Each output CSV contains:
 
-- the absolute path to each image on the local system,
-- the corresponding binary label for the task.
+- `image_path`: absolute path to the image on the local system
+- `label`: binary label for the corresponding task
 
-The generated CSV files are directly consumed by the evaluation scripts in
+These generated CSV files are the inputs expected by the evaluation scripts in
 `src/eval/`.
 
 ---
@@ -68,8 +74,9 @@ The generated CSV files are directly consumed by the evaluation scripts in
 
 - The scripts are intended to be executed from the **root of the repository**,
   preferably using Python module execution (e.g., `python -m`).
-- No image data or official annotations are copied or redistributed.
-- The scripts only generate split definitions and resolved image paths.
+- No image data is copied or redistributed.
+- The split assignment CSV files in `data/splits/` do not contain medical labels.
+  Labels are obtained locally from the official UWF4DR ground-truth files.
 
 For a detailed description of the experimental protocol and dataset handling,
 refer to `docs/reproducibility.md`.
