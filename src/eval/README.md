@@ -1,4 +1,4 @@
-# Model Evaluation (`eval/`)
+# Model Evaluation
 
 This directory contains the evaluation scripts used to assess pretrained deep
 learning models on the experimental test sets defined in the paper.
