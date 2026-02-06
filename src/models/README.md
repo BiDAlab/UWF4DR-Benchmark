@@ -1,4 +1,4 @@
-# Model Architectures and Loading Utilities (`models/`)
+# Model Architectures and Loading Utilities
 
 This directory contains model architecture definitions and utility functions
 used to load pretrained deep learning models for evaluation.
