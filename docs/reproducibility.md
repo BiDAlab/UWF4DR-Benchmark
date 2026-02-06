@@ -27,7 +27,7 @@ For each task, models are trained and evaluated using two image representations:
 - Spatial domain (RGB images)  
 - Frequency domain (magnitude of the 2D Discrete Fourier Transform, with values clipped at the 99th percentile)
 
-The experimental protocol described in the paper considers multiple backbone architectures, including convolutional neural networks (MobileNetV2 and ResNet18), vision transformer models (ViT-B/16), and retinal foundation models (RETFound).
+The experimental protocol described in the paper considers multiple backbone architectures, including convolutional neural networks (MobileNetV2 and ResNet18), vision transformer models (ViT-B/16), and retinal foundation models (RETFound, originally described in https://www.nature.com/articles/s41586-023-06555-x, with an official open-source Keras implementation available at https://github.com/uw-biomedical-ml/RETFound_MAE).
 
 ---
 
