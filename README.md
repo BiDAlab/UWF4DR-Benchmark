@@ -27,9 +27,6 @@ Specifically, it provides:
 - preprocessing pipelines for spatial and frequency domains,
 - evaluation scripts for convolutional neural network (CNN) models.
 
-All provided code has been validated from a clean environment using dummy models to
-ensure that the full pipeline can be executed by external users.
-
 ---
 
 ## Repository Structure
