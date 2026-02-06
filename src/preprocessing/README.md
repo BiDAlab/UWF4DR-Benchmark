@@ -1,4 +1,4 @@
-# Preprocessing Pipelines (`preprocessing/`)
+# Preprocessing Pipelines
 
 This directory contains the deterministic preprocessing pipelines applied to
 input images before model evaluation.
