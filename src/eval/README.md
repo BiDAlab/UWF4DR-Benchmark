@@ -55,9 +55,9 @@ The evaluation CSV files must contain the following columns:
 The evaluation framework is designed to support multiple model families and
 image representations, including:
 
-- Convolutional neural networks (e.g., MobileNetV2, ResNet18)
-- Vision transformer models (e.g., ViT-B/16)
-- Retinal foundation models (e.g., RETFound)
+- Convolutional neural networks (MobileNetV2 and ResNet18)
+- Vision transformer models (ViT-B/16)
+- Retinal foundation models (RETFound)
 
 Two input domains are supported:
 
