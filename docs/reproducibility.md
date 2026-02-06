@@ -19,8 +19,8 @@ This repository follows standard reproducibility practices for medical imaging a
 The experiments are conducted using the **UWF4DR dataset**, composed of ultra-widefield (UWF) fundus images. Three binary classification tasks are addressed:
 
 - **Task 1 – Image Quality Assessment**: Gradable vs. Ungradable images  
-- **Task 2 – Referable Diabetic Retinopathy (RDR)**: Non-referable vs. Referable DR  
-- **Task 3 – Diabetic Macular Edema (DME)**: Absence vs. Presence of DME  
+- **Task 2 – Referable Diabetic Retinopathy (RDR) Identification**: Non-referable vs. Referable DR  
+- **Task 3 – Diabetic Macular Edema (DME) Identification**: Absence vs. Presence of DME  
 
 For each task, models are trained and evaluated using two image representations:
 
