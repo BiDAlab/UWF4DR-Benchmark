@@ -10,7 +10,10 @@ The goal of this guide is to provide a clear and complete description of:
 - the preprocessing pipelines,
 - and the evaluation protocols.
 
-This repository follows standard reproducibility practices for medical imaging and deep learning research. Due to dataset licensing restrictions, raw data and trained model weights are not directly included in the repository.
+This guide focuses on reproducibility of the experimental design and evaluation
+pipeline. While exact numerical results may vary slightly due to hardware and
+software differences, all methodological steps and experimental decisions are
+fully specified.
 
 ---
 
@@ -52,20 +55,7 @@ The repository is organized as follows:
 
 ---
 
-## 3. Reproducibility Scope
-
-This guide allows reproduction of:
-
-- the experimental data splits,
-- the preprocessing pipelines,
-- the training and evaluation procedures,
-- and the reported quantitative and qualitative results.
-
-Exact numerical reproducibility may vary slightly due to hardware and software differences, but all methodological steps and experimental decisions are fully specified.
-
----
-
-## 4. Dataset Origin and Access
+## 3. Dataset Origin and Access
 
 The data used in this work originate from the **UWF4DR Challenge**, an official international challenge organized in the context of the **MICCAI 2024 conference**.
 
@@ -81,7 +71,7 @@ This repository is **not affiliated** with the organization of the challenge and
 
 ---
 
-## 4.1 Handling of Annotations and Licensing Constraints
+## 3.1 Handling of Annotations and Licensing Constraints
 
 Due to dataset licensing constraints imposed by the UWF4DR Challenge, official annotations and ground-truth labels are **not redistributed** in this repository.
 
@@ -112,7 +102,7 @@ This design ensures:
 
 ---
 
-## 5. Dataset Split Reconstruction
+## 4. Dataset Split Reconstruction
 
 One script is provided per task to reconstruct the exact dataset partitions used in the paper:
 
@@ -137,7 +127,7 @@ When executed correctly, the scripts generate `train.csv`, `validation.csv`, and
 
 ---
 
-## 6. Dependencies and Environments
+## 5. Dependencies and Environments
 
 Different model families were trained using separate Python environments to ensure compatibility with their respective dependencies.
 
