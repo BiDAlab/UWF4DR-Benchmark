@@ -24,31 +24,21 @@ provided by the challenge organizers.
 
 ## Experimental Protocol and Data Splits
 
-The **official UWF4DR challenge test set is not publicly accessible** and,
-therefore, cannot be used for independent evaluation or reproducibility
-outside the competition platform.
+The **official UWF4DR challenge test set is not publicly accessible** and therefore
+cannot be used for independent evaluation or reproducibility outside the
+competition platform.
 
 For this reason, the experiments reported in the associated paper rely on an
-**independent experimental protocol**, defined and implemented by the authors.
-
+**independent experimental protocol** defined and implemented by the authors.
 Instead of using the hidden challenge test set, the dataset is re-partitioned
-into **training, validation, and test subsets** following a fixed and fully
+into training, validation, and test subsets following a fixed and fully
 reproducible procedure.
 
----
+The exact split definitions used in the paper are provided as CSV files,
+specifying the image identifiers assigned to each subset.
 
-## Experimental Splits
 
-The train, validation, and test splits used in the paper follow an independent
-experimental protocol defined by the authors, as the official challenge test
-set is not publicly accessible and cannot be used for independent evaluation.
-
-The exact split definitions are provided as CSV files, specifying the image
-identifiers assigned to each subset.
-
----
-
-## Split Generation (Important)
+## Split Generation
 
 After downloading the official UWF4DR dataset, users **must generate the same
 experimental splits used in the paper by executing the provided scripts**:
