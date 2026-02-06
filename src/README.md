@@ -1,10 +1,10 @@
-# Source Code (`src/`)
+# Source Code
 
 This directory contains the core Python source code used to reproduce the
 experimental protocol and evaluation pipeline described in the associated paper.
 
 The code in `src/` is designed to support **reproducible evaluation** of deep
-learning models on the UWF4DR dataset, based on fixed experimental splits and
+learning models based on fixed experimental splits defined by the authors and
 deterministic preprocessing pipelines.
 
 This directory does **not** provide a full end-to-end training framework.
