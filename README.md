@@ -80,17 +80,12 @@ Detailed information about dataset structure and split reconstruction is provide
 
 The repository has been tested using **Python 3.10**.
 
-Dependencies required to evaluate CNN-based models (e.g., MobileNetV2 and ResNet18)
-are listed in:
+Dependencies required for each family of models used in this study are specified in
+the `requirements/` directory.
 
-- `requirements/cnn.txt`
-
-The CNN evaluation pipeline is fully functional and has been validated across all
-tasks and input domains.
-
-Support for transformer-based architectures, including **ViT-B/16**, as well as
-retinal foundation models such as **RETFound**, is planned and will be incorporated
-in future updates.
+Different model families (e.g., CNN-based models, vision transformers, and retinal
+foundation models) rely on distinct software stacks and are therefore intended to be
+used in separate Python environments.
 
 ---
 
