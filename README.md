@@ -18,12 +18,8 @@ of ultra-widefield (UWF) fundus images across three clinically relevant tasks:
 
 The repository is organized as follows:
 
-- `configs/`: configuration files for model training and evaluation  
 - `data/`: dataset documentation and expected directory structure (no images included)  
-- `docs/`: detailed reproducibility documentation  
-- `experiments/`: experiment definitions and execution scripts  
-- `models/`: model architectures and wrappers  
-- `results/`: evaluation outputs and visualizations (excluding large files)  
+- `docs/`: detailed reproducibility documentation     
 - `src/`: source code for preprocessing, training, evaluation, and explainability  
 
 ---
