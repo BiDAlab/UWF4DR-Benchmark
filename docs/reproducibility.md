@@ -69,7 +69,7 @@ This repository is **not affiliated** with the organization of the challenge and
 
 ---
 
-## 3.1 Handling of Annotations and Licensing Constraints
+### 3.1 Handling of Annotations and Licensing Constraints
 
 Due to dataset licensing constraints imposed by the UWF4DR Challenge, official annotations and ground-truth labels are **not redistributed** in this repository.
 
