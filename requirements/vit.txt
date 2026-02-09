@@ -8,6 +8,7 @@ Pillow==11.1.0
 
 # Deep learning (Vision Transformers)
 tensorflow==2.10.1
+tensorflow-addons==0.22.0
 keras==2.10.0
 vit-keras==0.1.2
 
