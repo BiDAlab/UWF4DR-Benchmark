@@ -33,7 +33,6 @@ def freq_transform_mag_clipped(image):
         )
         freq_image[..., c] = magnitude_norm
 
-    freq_image = preprocess_input(freq_image)
     return freq_image.astype(np.float32)
 
 
