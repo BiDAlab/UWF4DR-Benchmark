@@ -14,18 +14,18 @@ conv_base = vit.vit_b16(
     include_top=False,
     pretrained_top=False)
 
-    model = models.Sequential()
-    model.add(conv_base)
-    model.add(layers.GlobalAveragePooling2D())
-    model.add(
-        layers.Dense(
-            128,
-            activation="relu"
-        )
+model = models.Sequential()
+model.add(conv_base)
+model.add(layers.GlobalAveragePooling2D())
+model.add(
+    layers.Dense(
+        128,
+        activation="relu"
     )
-    model.add(layers.Dense(1, activation="sigmoid"))
+)
+model.add(layers.Dense(1, activation="sigmoid"))
 
-    return model
+return model
 
 
 def load_vitb16(weights_path, input_shape):
