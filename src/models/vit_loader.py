@@ -8,24 +8,24 @@ def build_vitb16(input_shape):
     Build ViT-B/16 exactly as used during training.
     """
 
-conv_base = vit.vit_b16(
-    image_size=448,
-    pretrained=True,
-    include_top=False,
-    pretrained_top=False)
+    conv_base = vit.vit_b16(
+        image_size=448,
+        pretrained=True,
+        include_top=False,
+        pretrained_top=False)
 
-model = models.Sequential()
-model.add(conv_base)
-model.add(layers.GlobalAveragePooling2D())
-model.add(
-    layers.Dense(
-        128,
-        activation="relu"
+    model = models.Sequential()
+    model.add(conv_base)
+    model.add(layers.GlobalAveragePooling2D())
+    model.add(
+        layers.Dense(
+            128,
+            activation="relu"
+        )
     )
-)
-model.add(layers.Dense(1, activation="sigmoid"))
+    model.add(layers.Dense(1, activation="sigmoid"))
 
-return model
+    return model
 
 
 def load_vitb16(weights_path, input_shape):
