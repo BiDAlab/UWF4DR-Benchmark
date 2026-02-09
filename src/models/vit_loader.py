@@ -1,31 +1,12 @@
-import tensorflow as tf
+from src.models.vitb16 import load_vitb16
 
 
 def load_vit_model(weights_path, input_shape):
     """
-    Load a ViT-B/16 model trained for binary classification.
-
-    Parameters
-    ----------
-    weights_path : str
-        Path to the full .keras model file.
-    input_shape : tuple
-        Expected input shape, e.g. (448, 448, 3).
-        Included for interface consistency with CNN loaders.
-
-    Returns
-    -------
-    tf.keras.Model
+    Load a ViT-B/16 model.
     """
-    if not weights_path.endswith(".keras"):
-        raise ValueError(
-            "ViT models must be provided as full .keras files"
-        )
 
-    model = tf.keras.models.load_model(
-        weights_path,
-        compile=False,
-        safe_mode=False,
+    return load_vitb16(
+        weights_path=weights_path,
+        input_shape=input_shape,
     )
-
-    return model
