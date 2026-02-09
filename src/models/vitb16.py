@@ -7,7 +7,6 @@ def build_vitb16(input_shape):
     Build ViT-B/16 binary classification model
     exactly as used during training.
     """
-
     if input_shape[0] != input_shape[1]:
         raise ValueError("ViT-B/16 requires square input")
 
@@ -31,17 +30,13 @@ def build_vitb16(input_shape):
     )(x)
     outputs = tf.keras.layers.Dense(1, activation="sigmoid")(x)
 
-    model = tf.keras.Model(inputs=inputs, outputs=outputs)
-
-    return model
+    return tf.keras.Model(inputs=inputs, outputs=outputs)
 
 
 def load_vitb16(weights_path, input_shape):
     """
-    Load a trained ViT-B/16 model (.keras) or build it.
+    Load a ViT-B/16 model (.keras) or build it if no weights are provided.
     """
-
-    # Full model provided
     if weights_path is not None and weights_path.endswith(".keras"):
         return tf.keras.models.load_model(
             weights_path,
@@ -49,5 +44,5 @@ def load_vitb16(weights_path, input_shape):
             safe_mode=False,
         )
 
-    # Build untrained model (dummy / testing)
+    # Dummy / untrained case
     return build_vitb16(input_shape)
