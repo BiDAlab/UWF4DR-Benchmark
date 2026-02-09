@@ -1,7 +1,6 @@
 import numpy as np
 import tensorflow as tf
 from PIL import Image, ImageFilter
-from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 
 
 def center_crop(image, crop_size):
@@ -52,6 +51,5 @@ def preprocess_spatial(image, target_size):
     image = color_normalization(image)
 
     image = np.asarray(image)
-    image = preprocess_input(image)
 
     return image.astype(np.float32)
