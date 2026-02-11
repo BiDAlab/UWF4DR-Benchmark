@@ -52,7 +52,7 @@ def preprocess_frequency(image, target_size):
         Preprocessed frequency-domain image compatible with MobileNetV2.
     """
     image = center_crop(image, (800, 800))
-    image = tf.image.resize(image, target_size).numpy().astype(np.float32)
+    image = cv2.resize(image, (target_size[1], target_size[0]), interpolation=cv2.INTER_LINEAR)
 
     image = freq_transform_mag_clipped(image)
 
