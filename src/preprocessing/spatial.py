@@ -1,4 +1,5 @@
 import numpy as np
+import cv2
 import tensorflow as tf
 from PIL import Image, ImageFilter
 
@@ -45,7 +46,7 @@ def preprocess_spatial(image, target_size):
         Preprocessed image ready for MobileNetV2.
     """
     image = center_crop(image, crop_size=(800, 800))
-    image = tf.image.resize(image, target_size).numpy().astype(np.uint8)
+    image = cv2.resize(image, (target_size[1], target_size[0]), interpolation=cv2.INTER_LINEAR)
 
     image = Image.fromarray(image)
     image = color_normalization(image)
