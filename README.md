@@ -90,40 +90,50 @@ used in separate Python environments.
 
 ## Foundation Model: RETFound
 
-This repository supports evaluation of models fine-tuned from RETFound:
+This repository includes support for models fine-tuned from **RETFound**, the large-scale retinal foundation model introduced by:
 
-Zhou et al., "A foundation model for generalizable disease detection from retinal images",
-Nature, 2023.
+Zhou et al., *"A foundation model for generalizable disease detection from retinal images"*, Nature, 2023.
 
-Official  RETFound Keras implementation repository:
+Official Keras implementation:
 https://github.com/wangseann/RETFound_MAE_keras
 
-The file `requirements/retfound.txt` is adapted from the official RETFound repository and contains the dependencies required to instantiate the RETFound architecture.
+Within the framework of this work, RETFound is incorporated as one of the evaluated architectures and is used both as an individual classifier and as a feature extractor for the feature-level fusion experiments described in the paper.
 
 ### License
 
-RETFound is released under the Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) license.
-
-Users must comply with the original RETFound license terms.
+RETFound is released under the Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) license. Users of this repository must comply with the original RETFound license terms, particularly with respect to the non-commercial restriction.
 
 This repository:
-- does not redistribute original pretrained RETFound weights,
+
+- does not redistribute the original pretrained RETFound weights,
 - does not include code copied from the official RETFound repository,
 - only provides scripts to load and evaluate fine-tuned models trained using the official RETFound codebase.
+
+For full license details, please refer to the official RETFound repository.
+
+### Requirements
+
+The file `requirements/retfound.txt` is adapted from the official RETFound repository and contains the dependencies required to instantiate the RETFound architecture. These dependencies are not included in the main `requirements.txt`, as RETFound support is optional.
+
+Users intending to work with RETFound models should install the required dependencies separately using:
+
+pip install -r requirements/retfound.txt
 
 ### Implementation Details
 
 In this work, RETFound was fine-tuned using the official `main_finetune.py` script (with minor modifications) provided in the original repository.
 
-For evaluation and feature extraction, we:
+For evaluation and feature extraction within this repository, we:
+
 - instantiate the ViT-Large architecture (`vit_large_patch16_224`) using `tfimm`,
-- load fine-tuned weights,
+- load the fine-tuned weights,
 - extract the CLS token representation after the final normalization layer.
 
 Image preprocessing follows the protocol described in the paper:
+
 - center crop to 800×800,
 - resize to 224×224,
-- normalization to [0,1].
+- normalization to the [0, 1] range.
 
 ---
 
