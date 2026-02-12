@@ -75,6 +75,8 @@ def _freq_from_path_py(path_tensor):
     # Match offline saving to uint8 (quantization)
     mag_u8 = np.clip(np.rint(mag), 0, 255).astype(np.uint8)
 
+    mag_u8 = mag_u8[..., ::-1]
+
     # Match main_finetune_fourier.py: Rescaling(1./255)
     out = mag_u8.astype(np.float32) / 255.0
     return out
