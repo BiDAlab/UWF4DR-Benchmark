@@ -86,6 +86,12 @@ Different model families (e.g., CNN-based models, vision transformers, and retin
 foundation models) rely on distinct software stacks and are therefore intended to be
 used in separate Python environments.
 
+### Python Version Notes
+
+While the main repository (CNNs and ViT-B/16 models) has been tested with **Python 3.10**, the RETFound implementation is based on **Python 3.9** and TensorFlow 2.8.x, following the official RETFound repository.
+
+For full compatibility and reproducibility of RETFound experiments, we recommend creating a dedicated **Python 3.9** environment when working with the dependencies listed in `requirements/retfound.txt`.
+
 ---
 
 ## Foundation Model: RETFound
