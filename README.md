@@ -88,6 +88,43 @@ used in separate Python environments.
 
 ---
 
+## Foundation Model: RETFound
+
+This repository supports evaluation of models fine-tuned from RETFound:
+
+Zhou et al., "A foundation model for generalizable disease detection from retinal images",
+Nature, 2023.
+
+Official repository:
+https://github.com/rmaphoh/RETFound
+
+### License
+
+RETFound is released under the Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) license.
+
+Users must comply with the original RETFound license terms.
+
+This repository:
+- does not redistribute original pretrained RETFound weights,
+- does not include code copied from the official RETFound repository,
+- only provides scripts to load and evaluate fine-tuned models trained using the official RETFound codebase.
+
+### Implementation Details
+
+In this work, RETFound was fine-tuned using the official `main_finetune.py` script (with minor modifications) provided in the original repository.
+
+For evaluation and feature extraction, we:
+- instantiate the ViT-Large architecture (`vit_large_patch16_224`) using `tfimm`,
+- load fine-tuned weights,
+- extract the CLS token representation after the final normalization layer.
+
+Image preprocessing follows the protocol described in the paper:
+- center crop to 800×800,
+- resize to 224×224,
+- normalization to [0,1].
+
+---
+
 ## Scope and Limitations
 
 This repository does **not** include:
