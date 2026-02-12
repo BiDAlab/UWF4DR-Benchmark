@@ -5,7 +5,7 @@ import tensorflow as tf
 from sklearn.metrics import roc_auc_score, average_precision_score, roc_curve
 
 from src.models.retfound_loader import load_retfound_model
-from src.preprocessing.frequency import preprocess_frequency as np_preprocess_frequency
+from src.preprocessing.frequency import center_crop, freq_transform_mag_clipped  # reutiliza EXACTO tu código
 
 
 # ---------------------------------------------------------------------
@@ -46,40 +46,44 @@ def preprocess_spatial_tf(path, label):
 
 
 # ---------------------------------------------------------------------
-# Frequency pipeline (reuse repo preprocessing)
+# Frequency pipeline (match how you generated & saved Fourier images)
 # ---------------------------------------------------------------------
 
-def _freq_py(image_tensor):
+def _freq_from_path_py(path_tensor):
     """
-    NumPy/OpenCV preprocessing wrapped for tf.py_function.
+    Replicate exactly the pipeline used to generate the saved Fourier images:
+      cv2.imread (BGR) -> BGR2RGB -> center_crop(800) -> resize(224) ->
+      FFT mag clipped p99 + cv2.normalize to 0..255 -> uint8 -> /255
 
-    image_tensor: EagerTensor with shape (H, W, 3), dtype uint8 or float32
-    returns: np.float32 array shape (224,224,3) in [0,1]
+    Returns float32 (224,224,3) in [0,1].
     """
-    img = image_tensor.numpy()
-    # ensure uint8-like range if decode produced uint8 (usually it does)
-    if img.dtype != np.uint8:
-        img = img.astype(np.uint8)
+    import cv2  # ensure available in env
+    path = path_tensor.numpy().decode("utf-8")
 
-    # This function already does:
-    # - center_crop 800x800
-    # - resize to target_size
-    # - FFT magnitude clipped and normalized to 0..255 per channel
-    img_freq = np_preprocess_frequency(img, target_size=(224, 224)).astype(np.float32)
+    img = cv2.imread(path)
+    if img is None:
+        raise RuntimeError(f"Could not read image with cv2.imread: {path}")
 
-    # match main_finetune_fourier.py scaling: Rescaling(1./255)
-    img_freq = img_freq / 255.0
-    return img_freq
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+    # EXACT as your offline generator
+    img = center_crop(img, crop_size=(800, 800))
+    img = cv2.resize(img, (224, 224))  # default interpolation is INTER_LINEAR
+
+    mag = freq_transform_mag_clipped(img)  # returns float32 0..255 in your repo
+
+    # Match offline saving to uint8 (quantization)
+    mag_u8 = np.clip(np.rint(mag), 0, 255).astype(np.uint8)
+
+    # Match main_finetune_fourier.py: Rescaling(1./255)
+    out = mag_u8.astype(np.float32) / 255.0
+    return out
 
 
 def preprocess_frequency_tf(path, label):
-    image = tf.io.read_file(path)
-    image = tf.image.decode_jpeg(image, channels=3)
-
-    # Use tf.py_function to reuse NumPy/OpenCV FFT preprocessing
-    image = tf.py_function(func=_freq_py, inp=[image], Tout=tf.float32)
+    # Only use path -> cv2.imread inside py_function (do NOT decode with TF)
+    image = tf.py_function(func=_freq_from_path_py, inp=[path], Tout=tf.float32)
     image.set_shape((224, 224, 3))
-
     return image, label
 
 
@@ -127,7 +131,6 @@ def main():
     image_paths = data[:, 0]
     labels_int = data[:, 1].astype(int)
 
-    # mimic label_mode="categorical"
     labels = tf.keras.utils.to_categorical(labels_int, num_classes=args.num_classes).astype(np.float32)
 
     ds = tf.data.Dataset.from_tensor_slices((image_paths, labels))
@@ -145,10 +148,8 @@ def main():
     print("Running inference...")
     logits = model.predict(ds, verbose=1)
 
-    # match main_finetune.py evaluation: softmax over logits, take class-1 prob
     probs = tf.nn.softmax(logits, axis=1).numpy()[:, 1]
 
-    # recover y_true from categorical labels
     y_true = np.argmax(np.concatenate([y.numpy() for _, y in ds], axis=0), axis=1)
 
     print("Computing metrics...")
