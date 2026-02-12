@@ -113,11 +113,7 @@ For full license details, please refer to the official RETFound repository.
 
 ### Requirements
 
-The file `requirements/retfound.txt` is adapted from the official RETFound repository and contains the dependencies required to instantiate the RETFound architecture. These dependencies are not included in the main `requirements.txt`, as RETFound support is optional.
-
-Users intending to work with RETFound models should install the required dependencies separately using:
-
-pip install -r requirements/retfound.txt
+The file `requirements/retfound.txt` is adapted from the official RETFound repository and contains the dependencies required to instantiate the RETFound architecture.
 
 ### Implementation Details
 
