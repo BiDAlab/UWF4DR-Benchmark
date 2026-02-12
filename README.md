@@ -96,7 +96,7 @@ Zhou et al., "A foundation model for generalizable disease detection from retina
 Nature, 2023.
 
 Official repository:
-https://github.com/rmaphoh/RETFound
+https://github.com/wangseann/RETFound_MAE_keras
 
 ### License
 
