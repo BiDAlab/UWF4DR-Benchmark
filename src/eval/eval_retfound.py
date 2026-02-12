@@ -70,15 +70,18 @@ def _freq_from_path_py(path_tensor):
     img = center_crop(img, crop_size=(800, 800))
     img = cv2.resize(img, (224, 224))  # default interpolation is INTER_LINEAR
 
-    mag = freq_transform_mag_clipped(img)  # returns float32 0..255 in your repo
+    mag = freq_transform_mag_clipped(img)
 
-    # Match offline saving to uint8 (quantization)
     mag_u8 = np.clip(np.rint(mag), 0, 255).astype(np.uint8)
 
     mag_u8 = mag_u8[..., ::-1]
 
-    # Match main_finetune_fourier.py: Rescaling(1./255)
-    out = mag_u8.astype(np.float32) / 255.0
+    _, buffer = cv2.imencode(".jpg", mag_u8)
+    mag_jpeg = cv2.imdecode(buffer, cv2.IMREAD_COLOR)
+
+    mag_jpeg = cv2.cvtColor(mag_jpeg, cv2.COLOR_BGR2RGB)
+
+    out = mag_jpeg.astype(np.float32) / 255.0
     return out
 
 
