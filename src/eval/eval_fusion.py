@@ -91,15 +91,17 @@ def main():
     # -----------------------------------------------------------------
 
     for model_name in model_names:
+        
+        task_file = args.task.replace("task", "task_")
 
         train_csv = os.path.join(
             features_dir,
-            f"features_{model_name}_{args.task}_train.csv"
+            f"features_{model_name}_{task_file}_train.csv"
         )
 
         test_csv = os.path.join(
             features_dir,
-            f"features_{model_name}_{args.task}_test.csv"
+            f"features_{model_name}_{task_file}_test.csv"
         )
 
         if not os.path.exists(train_csv):
