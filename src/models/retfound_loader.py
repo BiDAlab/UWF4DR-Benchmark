@@ -6,16 +6,19 @@ import tensorflow as tf
 # Model construction
 # ---------------------------------------------------------------------
 
-def build_retfound_model(num_classes: int = 2) -> tf.keras.Model:
+def build_retfound_model(
+    num_classes: int = 2,
+    global_pool: bool = True,
+    image_size: int = 224,
+) -> tf.keras.Model:
     """
-    Instantiate RETFound ViT-Large architecture (vit_large_patch16_224).
+    Build RETFound exactly as in main_finetune_fourier.py.
 
-    Args:
-        num_classes: number of output classes used during fine-tuning.
-
-    Returns:
-        tf.keras.Model
+    - global_pool=True  -> vit_large_patch16_224_mae
+    - global_pool=False -> vit_large_patch16_224
+    - cutmix == 0       -> wrap with data augmentation layers
     """
+
     try:
         import tfimm
     except ImportError as e:
@@ -24,46 +27,79 @@ def build_retfound_model(num_classes: int = 2) -> tf.keras.Model:
             "Install it using: pip install -r requirements/retfound.txt"
         ) from e
 
-    model = tfimm.create_model(
-        "vit_large_patch16_224",
+    model_name = (
+        "vit_large_patch16_224_mae"
+        if global_pool
+        else "vit_large_patch16_224"
+    )
+
+    # Backbone creation
+    base_model = tfimm.create_model(
+        model_name,
         nb_classes=num_classes,
         pretrained=False,
     )
 
+    # Match training: cutmix == 0 -> wrap with augmentation layers
+    data_augmentation = tf.keras.Sequential(
+        [
+            tf.keras.layers.RandomFlip("horizontal_and_vertical"),
+            tf.keras.layers.RandomRotation(0.2),
+            tf.keras.layers.RandomContrast(factor=(0.0, 0.5)),
+        ],
+        name="data_augmentation",
+    )
+
+    inputs = tf.keras.Input(shape=(image_size, image_size, 3), name="input")
+    x = data_augmentation(inputs)
+    outputs = base_model(x)
+
+    model = tf.keras.Model(inputs, outputs, name="retfound_wrapped")
+
     return model
 
+
+# ---------------------------------------------------------------------
+# Weight loading (REQUIRED for MAE-style checkpoints)
+# ---------------------------------------------------------------------
 
 def load_retfound_weights(
     model: tf.keras.Model,
     weights_path: str
 ) -> tf.keras.Model:
     """
-    Load fine-tuned RETFound weights (.h5).
+    Load fine-tuned RETFound weights (.h5) from training script.
 
-    Args:
-        model: model returned by build_retfound_model()
-        weights_path: path to .h5 weights
-
-    Returns:
-        model with loaded weights
+    Must use by_name=True and skip_mismatch=True because
+    checkpoints are MAE-style and do not match Keras exactly.
     """
-    model.load_weights(weights_path, by_name=True, skip_mismatch=True)
 
-    # Force graph build
+    # Build graph before loading weights
     _ = model(tf.zeros((1, 224, 224, 3)))
+
+    # Required for RETFound MAE-style checkpoints
+    model.load_weights(weights_path, by_name=True, skip_mismatch=True)
 
     return model
 
 
 def load_retfound_model(
     weights_path: str,
-    num_classes: int = 2
+    num_classes: int = 2,
+    global_pool: bool = True,
 ) -> tf.keras.Model:
     """
-    Convenience wrapper: build + load in one call.
+    Convenience wrapper: build + load.
     """
-    model = build_retfound_model(num_classes=num_classes)
+
+    model = build_retfound_model(
+        num_classes=num_classes,
+        global_pool=global_pool,
+        image_size=224,
+    )
+
     model = load_retfound_weights(model, weights_path)
+
     return model
 
 
