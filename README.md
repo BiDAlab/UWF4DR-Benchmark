@@ -95,8 +95,10 @@ This repository supports evaluation of models fine-tuned from RETFound:
 Zhou et al., "A foundation model for generalizable disease detection from retinal images",
 Nature, 2023.
 
-Official repository:
+Official  RETFound Keras implementation repository:
 https://github.com/wangseann/RETFound_MAE_keras
+
+The file `requirements/retfound.txt` is adapted from the official RETFound repository and contains the dependencies required to instantiate the RETFound architecture.
 
 ### License
 
