@@ -113,7 +113,7 @@ For full license details, please refer to the official RETFound repository.
 
 ### Requirements
 
-The file `requirements/retfound.txt` is adapted from the official RETFound repository and contains the dependencies required to instantiate the RETFound architecture.
+The file `requirements/retfound.txt` is derived from the official RETFound `requirements.txt` file and preserves the original dependency versions necessary to instantiate and use the RETFound architecture.
 
 ### Implementation Details
 
