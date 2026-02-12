@@ -11,13 +11,6 @@ def build_retfound_model(
     global_pool: bool = True,
     image_size: int = 224,
 ) -> tf.keras.Model:
-    """
-    Build RETFound exactly as in main_finetune_fourier.py.
-
-    - global_pool=True  -> vit_large_patch16_224_mae
-    - global_pool=False -> vit_large_patch16_224
-    - cutmix == 0       -> wrap with data augmentation layers
-    """
 
     try:
         import tfimm
