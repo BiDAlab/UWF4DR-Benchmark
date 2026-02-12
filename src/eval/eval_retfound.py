@@ -148,7 +148,7 @@ def main():
     ds = ds.batch(args.batch_size).prefetch(tf.data.AUTOTUNE)
 
     print("Loading RETFound model...")
-    model = load_retfound_model(args.model, num_classes=args.num_classes, global_pool=True)
+    model = load_retfound_model(args.model, num_classes=args.num_classes)
 
     print("Running inference...")
     logits = model.predict(ds, verbose=1)
