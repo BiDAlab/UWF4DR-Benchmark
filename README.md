@@ -73,6 +73,15 @@ Each task may require additional dataset-specific arguments. For full documentat
 python -m src.prepare_splits.prepare_split_task_X -h
 ```
 
+### 2️⃣ Install dependencies
+
+Different model families (CNNs, ViT-B/16, and RETFound) have separate dependency specifications located in the `requirements/` directory.
+
+Create and activate the appropriate environment before running any evaluation script.
+
+For detailed installation instructions and environment recommendations, see:
+`requirements/README.md` (if available) or the corresponding requirements file.
+
 ---
 
 ## Reproducibility and Dependencies
