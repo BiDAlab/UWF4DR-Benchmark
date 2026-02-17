@@ -107,14 +107,12 @@ CNNs, ViT-B/16 and MLP-based feature-level fusion components were tested with Py
 
 ## Foundation Model: RETFound
 
-This repository includes support for models fine-tuned from **RETFound**, the large-scale retinal foundation model introduced by:
+This repository includes support for models fine-tuned from **RETFound**, the large-scale retinal foundation model introduced by Zhou et al. in *"A foundation model for generalizable disease detection from retinal images"* (Nature, 2023).
 
-Zhou et al., *"A foundation model for generalizable disease detection from retinal images"*, Nature, 2023.
-
-Official Keras implementation:
+The official Keras implementation of RETFound is available in the following repository:
 https://github.com/wangseann/RETFound_MAE_keras
 
-Within the framework of this work, RETFound is incorporated as one of the evaluated architectures and is used both as an individual classifier and as a feature extractor for the feature-level fusion experiments described in the paper.
+Within the framework of this work, RETFound is incorporated as one of the evaluated architectures and is used both as an individual classifier and as a feature extractor for MLP-based feature-level fusion experiments described in the associated paper.
 
 ### License
 
@@ -123,8 +121,8 @@ RETFound is released under the Creative Commons Attribution-NonCommercial 4.0 In
 This repository:
 
 - does not redistribute the original pretrained RETFound weights,
-- does not include code copied from the official RETFound repository,
-- only provides scripts to load and evaluate fine-tuned models trained using the official RETFound codebase.
+- does not redistribute source code from the official RETFound repository,
+- only provides wrappers to load and evaluate fine-tuned models trained using the official RETFound codebase.
 
 For full license details, please refer to the official RETFound repository.
 
@@ -132,21 +130,11 @@ For full license details, please refer to the official RETFound repository.
 
 The file `requirements/retfound.txt` is derived from the official RETFound `requirements.txt` file and preserves the original dependency versions necessary to instantiate and use the RETFound architecture.
 
-### Implementation Details
+### Implementation Notes
 
-In this work, RETFound was fine-tuned using the official `main_finetune.py` script (with minor modifications) provided in the original repository.
+The fine-tuning procedure described in the associated paper was conducted using the official `main_finetune.py` script (with minor modifications) from the original RETFound repository.
 
-For evaluation and feature extraction within this repository, we:
-
-- instantiate the ViT-Large architecture (`vit_large_patch16_224`) using `tfimm`,
-- load the fine-tuned weights,
-- extract the CLS token representation after the final normalization layer.
-
-Image preprocessing follows the protocol described in the paper:
-
-- center crop to 800×800,
-- resize to 224×224,
-- normalization to the [0, 1] range.
+Technical details regarding model instantiation, weight loading, and feature extraction within this repository are documented in `src/models/README.md`.
 
 ---
 
