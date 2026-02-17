@@ -152,17 +152,18 @@ Image preprocessing follows the protocol described in the paper:
 
 ## Scope and Limitations
 
-This repository does **not** include:
+This repository does not include:
 
-- the UWF4DR image data,
-- trained model weights,
-- precomputed experimental results.
+- The UWF4DR image data.
+- Trained model weights.
+- Precomputed predictions or reported performance metrics.
 
-Trained models used in the paper will be hosted separately on institutional servers
-(BiDA Lab) and made available for evaluation when possible.
+It includes dataset split definitions and precomputed feature embeddings for feature-level fusion experiments, but no raw images or trained models.
 
 ---
 
 ## License and Citation
 
-License and citation information will be added upon paper acceptance.
+The repository license will be specified in a future update.
+
+The formal citation for the paper will be provided upon acceptance.
