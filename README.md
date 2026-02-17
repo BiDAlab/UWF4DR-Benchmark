@@ -46,17 +46,17 @@ described in the paper. Specifically, it provides:
 
 The repository is organized as follows:
 
-- `data/`  
-  Dataset documentation and fixed split definition files employed in the paper.  
-  **No image data is included.**
+- `data/`
+  - `splits/`: Official train/validation/test CSV files used in the paper. **No image data is included.**
+  - `fusion/`: Precomputed feature embeddings (per task, domain, and backbone) used for feature-level fusion experiments.
 
-- `src/`  
-  Python source code for dataset split preparation, preprocessing, and model evaluation.
-  Model architecture definitions are included, but no trained model weights are stored.
-  Pretrained models used in the paper are hosted separately on institutional servers (BiDA Lab).
+- `src/`
+  - `eval/`: Evaluation scripts for CNN, ViT-B/16, RETFound, and fusion (MLP) models.
+  - `models/`: Model builders and loaders (CNN backbones, ViT-B/16, RETFound wrapper, fusion MLP). Model architecture definitions are included, but no trained model weights are stored. Pretrained models used in the paper are hosted separately on institutional servers (BiDA Lab).
+  - `preprocessing/`: Spatial and frequency-domain preprocessing pipelines.
+  - `prepare_splits/`: Scripts to reconstruct the exact dataset partitions described in the paper.
 
-- `requirements/`  
-  Dependency specifications for the different model families used in the study.
+- `requirements/`: Dependency specifications for the different model families used in the study.
 
 - `docs/`  
   Additional documentation related to reproducibility and the experimental protocol.
