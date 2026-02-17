@@ -45,8 +45,7 @@ The `src/` directory is organized as follows:
 
 - `models/`  
   Model architecture definitions and utility functions for loading pretrained
-  models (both CNNs, ViT-B/16, RETFound, and fusion MLP models).  
-  No trained model weights are stored in this repository.
+  models (both CNNs, ViT-B/16, RETFound, and fusion MLP models). No trained model weights are stored in this repository.
 
 - `preprocessing/`  
   Deterministic preprocessing pipelines for spatial-domain and frequency-domain
