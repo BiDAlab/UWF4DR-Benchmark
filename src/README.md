@@ -44,8 +44,9 @@ The `src/` directory is organized as follows:
   employed in the paper for each task, starting from the official UWF4DR dataset.
 
 - `models/`  
-  Model architecture definitions and utility functions for loading pretrained
-  models (both CNNs, ViT-B/16, RETFound, and fusion MLP models). No trained model weights are stored in this repository.
+  Model architecture definitions and utility functions for loading pretrained models,
+  including CNN architectures (MobileNetV2 and ResNet18), ViT-B/16, RETFound, and fusion MLP models.
+  No trained model weights are stored in this repository.
 
 - `preprocessing/`  
   Deterministic preprocessing pipelines for spatial-domain and frequency-domain
