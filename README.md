@@ -70,7 +70,7 @@ Once authorized access to the UWF4DR dataset is obtained, users can reconstruct 
 
 Each task may require additional dataset-specific arguments. For full documentation and argument descriptions, see: src/prepare_splits/README.md. You can also inspect the available options using: 
 ```bash
-python -m src.prepare_splits.prepare_split_taskX -h
+python -m src.prepare_splits.prepare_split_task_X -h
 ```
 
 ---
