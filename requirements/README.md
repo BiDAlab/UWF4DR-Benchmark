@@ -6,6 +6,8 @@ Each file is intended to be installed in a **separate Python environment**, as d
 
 Unless otherwise specified, these environments were tested with **Python 3.10**.
 
+Users should select and install only the requirements file corresponding to the model family they intend to evaluate.
+
 ## cnn.txt
 Dependencies for convolutional neural network (CNN) models. The CNN architectures used in this study include MobileNetV2 and ResNet18.
 
@@ -16,5 +18,3 @@ Dependencies for vision transformer (ViT) models.
 
 ## retfound.txt
 Dependencies for RETFound-based retinal foundation models. This environment follows the original RETFound dependency versions and is intended to be used with Python 3.9.
-
-Users should select and install only the requirements file corresponding to the model family they intend to evaluate.
