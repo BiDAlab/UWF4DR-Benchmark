@@ -107,11 +107,13 @@ Each script:
 - resolves the correct image paths from the downloaded datasets,  
 - and saves the resulting splits as CSV files.
 
-**Task-specific considerations:**
+**Task-specific considerations**
 
-- For **Task 1**, some images physically reside in the Task 2/3 folders; this is handled automatically by the script.  
-- For **Task 2**, all images in the Task 2/3 dataset are included.  
-- For **Task 3**, only images with an available DME annotation (non-empty DME label in the official CSV) are included.
+The following aspects arise from the official folder structure and annotation organization of the UWF4DR Challenge dataset as distributed through the competition platform:
+
+- For **Task 1**, some images labeled for image quality assessment physically reside within the Task 2/3 dataset folders in the official download; this is handled automatically by the reconstruction script.  
+- For **Task 2**, all images included in the Task 2/3 dataset are considered.  
+- For **Task 3**, only images with an available DME annotation (i.e., non-empty DME label in the official ground-truth CSV file) are included.
 
 When executed correctly, the scripts generate `train.csv`, `validation.csv`, and `test.csv` files whose sizes exactly match those reported in the paper.
 
