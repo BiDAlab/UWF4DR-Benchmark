@@ -17,7 +17,7 @@ fully specified.
 
 ---
 
-## 1. Experimental Overview
+## Experimental Overview
 
 The experiments are conducted using the **UWF4DR dataset**, composed of ultra-widefield (UWF) fundus images. Three binary classification tasks are addressed:
 
@@ -27,31 +27,25 @@ The experiments are conducted using the **UWF4DR dataset**, composed of ultra-wi
 
 For each task, models trained as part of the study described in the paper were evaluated using two image representations:
 
-- Spatial domain (RGB images)  
-- Frequency domain (magnitude of the 2D Discrete Fourier Transform, with values clipped at the 99th percentile)
+- Spatial domain (RGB images), including a dedicated color normalization preprocessing step.
+- Frequency domain (magnitude of the 2D Discrete Fourier Transform, with values clipped at the 99th percentile).
 
-The experimental protocol described in the paper considers multiple backbone architectures, including convolutional neural networks (MobileNetV2 and ResNet18), vision transformer models (ViT-B/16), and retinal foundation models (RETFound, originally described in https://www.nature.com/articles/s41586-023-06555-x, with an official open-source Keras implementation available at https://github.com/uw-biomedical-ml/RETFound_MAE).
+The experimental protocol described in the paper considers multiple backbone architectures, including convolutional neural networks (MobileNetV2 and ResNet18), vision transformer models (ViT-B/16), and retinal foundation models (RETFound, originally described in https://www.nature.com/articles/s41586-023-06555-x, with an official open-source Keras implementation available at https://github.com/uw-biomedical-ml/RETFound_MAE). In addition to individual backbone models, MLP-based feature-level fusion experiments were conducted by combining feature representations extracted from different models within the same domain.
 
 ---
 
-## 2. Repository Structure
+## Repository Structure
 
-The repository is organized as follows:
+A high-level overview of the repository structure is provided in the main `README.md`.
 
-- `data/`  
-  Dataset documentation and fixed split definition files employed in the paper.  
-  **No image data is included.**
+In summary, the repository contains:
 
-- `src/`  
-  Python source code for dataset split preparation, preprocessing, and model evaluation.
-  Model architecture definitions are included, but no trained model weights are stored.
-  Pretrained models used in the paper are hosted separately on institutional servers (BiDA Lab).
+- split definitions and precomputed feature embeddings under `data/`,
+- source code for split reconstruction, preprocessing, and model evaluation under `src/`,
+- dependency specifications under `requirements/`,
+- and this documentation under `docs/`.
 
-- `requirements/`  
-  Dependency specifications for the different model families used in the study.
-
-- `docs/`  
-  Additional documentation related to reproducibility and the experimental protocol.
+For a detailed and up-to-date description of the repository layout, please refer to the main `README.md`.
 
 ---
 
