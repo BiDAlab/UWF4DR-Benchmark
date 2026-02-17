@@ -98,7 +98,7 @@ Each generated CSV file contains:
 - `label`: binary task label
 
 These files can be passed directly to the evaluation scripts in src/eval/
-via the --splits_dir argument.
+via the `--splits_dir` argument.
 
 ---
 
