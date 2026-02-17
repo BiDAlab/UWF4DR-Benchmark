@@ -34,9 +34,7 @@ Instead of using the hidden challenge test set, the dataset is re-partitioned
 into training, validation, and test subsets following a fixed and fully
 reproducible procedure.
 
-The exact split definitions used in the paper are provided as CSV files,
-specifying the image identifiers assigned to each subset. These files are
-available in the repository under `data/splits/`:
+The split definition files used in the paper are provided under `data/splits/` and define the fixed partitioning protocol:
 
 - `task1_split.csv`
 - `task2_split.csv`
