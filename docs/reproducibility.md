@@ -10,7 +10,7 @@ The goal of this guide is to provide a clear and complete description of:
 - the preprocessing pipelines,
 - and the evaluation protocols.
 
-This guide focuses on reproducibility of the experimental design and evaluation
+This guide focuses on the reproducibility of the experimental design and evaluation
 pipeline. While exact numerical results may vary slightly due to hardware and
 software differences, all methodological steps and experimental decisions are
 fully specified.
