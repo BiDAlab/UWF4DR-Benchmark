@@ -70,10 +70,8 @@ prepared_taskX/
 └── test.csv
 ~~~
 
-Each generated CSV file specifies the image identifiers and labels assigned to the
-corresponding subset.
-
-These generated files are then used directly by the evaluation
+Each generated CSV file specifies the image paths and corresponding labels assigned to the
+subset. These generated files are then used directly by the evaluation
 scripts provided in the repository.
 
 ---
