@@ -36,8 +36,6 @@ The experimental protocol described in the paper considers multiple backbone arc
 
 ## Repository Structure
 
-A high-level overview of the repository structure is provided in the main `README.md`.
-
 In summary, the repository contains:
 
 - split definitions and precomputed feature embeddings under `data/`,
@@ -45,7 +43,7 @@ In summary, the repository contains:
 - dependency specifications under `requirements/`,
 - and this documentation under `docs/`.
 
-For a detailed and up-to-date description of the repository layout, please refer to the main `README.md`.
+For a complete overview of the repository structure, please refer to the main `README.md`.
 
 ---
 
