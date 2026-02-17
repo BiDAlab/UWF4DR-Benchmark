@@ -70,7 +70,7 @@ Once authorized access to the UWF4DR dataset is obtained, users can reconstruct 
 
 Each task may require additional dataset-specific arguments. For full documentation and argument descriptions, see src/prepare_splits/README.md. You can also inspect the available options using: 
 ```bash
-python -m src.prepare_splits.prepare_split_task_X -h
+python -m src.prepare_splits.prepare_split_task_<task_number> -h
 ```
 
 ### 2️⃣ Install dependencies
@@ -80,6 +80,20 @@ Different model families (CNNs, ViT-B/16, and RETFound) have separate dependency
 Create and activate the appropriate environment before running any evaluation script.
 
 For detailed installation instructions and environment recommendations, see `requirements/README.md`.
+
+
+### 3️⃣ Evaluate trained models
+
+Once dataset partitions are prepared and model weights are available, trained models can be evaluated using the task-specific scripts located in `src/eval`.
+
+Each evaluation script corresponds to a specific model family (CNNs, ViT-B/16, RETFound, Fusion) and may require additional arguments such as model paths, domain selection (spatial or frequency), and split directory locations.
+
+For full usage details and argument descriptions, see `src/eval/README.md`
+
+You can also inspect available options using:
+```bash
+python -m src.eval.eval_<model_family> -h
+```
 
 ---
 
