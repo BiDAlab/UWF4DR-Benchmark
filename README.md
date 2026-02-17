@@ -64,13 +64,23 @@ This repository is organized as follows:
 
 ## Split Reconstruction and Usage
 
-Once authorized access to the UWF4DR dataset is obtained, users can reproduce the exact
-experimental splits used in the paper by running the provided
-`src/prepare_splits/` scripts.
+
 
 Detailed information about dataset structure and split reconstruction is provided in:
 
 - `data/README.md`
+
+
+## Quickstart
+
+### 1️⃣ Reconstruct dataset splits
+
+Once authorized access to the UWF4DR dataset is obtained, users can reproduce the exact experimental splits used in the paper by running the provided task-specific split preparation scripts located in `src/data/prepare_splits´:
+
+```bash
+python -m src.prepare_splits.prepare_split_task1 --output_dir <OUTPUT_DIR>
+python -m src.prepare_splits.prepare_split_task2 --output_dir <OUTPUT_DIR>
+python -m src.prepare_splits.prepare_split_task3 --output_dir <OUTPUT_DIR>
 
 ---
 
