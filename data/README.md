@@ -80,7 +80,7 @@ scripts provided in the repository.
 
 The `data/fusion/` directory contains precomputed feature embeddings used for the MLP-based feature-level fusion experiments described in the paper.
 
-These embeddings were extracted from trained backbone models and are organized by task and domain. They are provided to enable reproducible fusion evaluation without requiring users to re-extract intermediate representations from each backbone model.
+These embeddings were extracted from trained backbone models described in the paper and are organized by task and domain. They are provided to enable reproducible fusion evaluation without requiring users to re-extract intermediate representations from each backbone model.
 
 No raw images or trained model weights are included in this directory.
 
