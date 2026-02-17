@@ -61,7 +61,7 @@ Each script automatically:
 ## Expected Output Structure
 
 After running the corresponding `src/prepare_splits/prepare_split_task_X.py` script, the output
-directory will contain:
+directory ((e.g., `prepared_taskX/`) will contain:
 
 ~~~
 prepared_taskX/
