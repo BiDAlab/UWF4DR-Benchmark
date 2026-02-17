@@ -68,7 +68,7 @@ The code in `src/` is intended to be used in conjunction with:
 
 - `requirements/`  
   Specifies the Python dependencies required for different model families.
-  Separate environments are expected for different architectures.
+  Separate Python environments are expected for different model families.
 
 - `docs/reproducibility.md`  
   Provides a detailed explanation of the experimental protocol and how the
