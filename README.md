@@ -114,7 +114,7 @@ CNNs, ViT-B/16 and MLP-based feature-level fusion components were tested with Py
 This repository includes support for models fine-tuned from **RETFound**, the large-scale retinal foundation model introduced by Zhou et al. in *"A foundation model for generalizable disease detection from retinal images"* (Nature, 2023).
 
 The official Keras implementation of RETFound is available in the following repository:
-https://github.com/wangseann/RETFound_MAE_keras
+https://github.com/uw-biomedical-ml/RETFound_MAE
 
 Within the experiments described in the associated paper, RETFound is incorporated as one of the evaluated architectures and is used both as an individual classifier and as a feature extractor for MLP-based feature-level fusion experiments.
 
