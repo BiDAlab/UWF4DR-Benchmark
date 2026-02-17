@@ -119,13 +119,15 @@ When executed correctly, the scripts generate `train.csv`, `validation.csv`, and
 
 ## Dependencies and Environments
 
-Different model families were trained using separate Python environments to ensure compatibility with their respective dependencies.
+Different model families rely on separate Python environments to ensure compatibility with their respective dependencies. The exact requirements for each model family are provided in the `requirements/` directory.
 
-The exact requirements for each model family are provided in the `requirements/` directory.
+Unless otherwise specified, environments were tested with **Python 3.10**. RETFound follows the official implementation based on **Python 3.9** and TensorFlow 2.8.x.
 
-Some Python dependencies are installed directly from GitHub repositories. Therefore, **Git must be available** in the system before installing the requirements.
+Some dependencies are installed directly from GitHub repositories. Therefore, **Git must be available** in the system before installing the requirements.
 
 If using conda, Git can be installed with:
 
 ```bash
 conda install -c conda-forge git
+```
+
