@@ -66,13 +66,7 @@ This repository is organized as follows:
 
 ### 1️⃣ Reconstruct dataset splits
 
-Once authorized access to the UWF4DR dataset is obtained, users can reconstruct the exact train/validation/test partitions used in the experiments by running the task-specific split preparation scripts located in `src/prepare_splits`:
-
-```bash
-python -m src.prepare_splits.prepare_split_task1 --output_dir <OUTPUT_DIR>
-python -m src.prepare_splits.prepare_split_task2 --output_dir <OUTPUT_DIR>
-python -m src.prepare_splits.prepare_split_task3 --output_dir <OUTPUT_DIR>
-```
+Once authorized access to the UWF4DR dataset is obtained, users can reconstruct the exact train/validation/test partitions used in the experiments by running the task-specific split preparation scripts located in `src/prepare_splits`. Each task may require additional dataset-specific arguments. For full documentation and argument descriptions, see: src/prepare_splits/README.md. You can also inspect the available options using: python -m src.prepare_splits.prepare_split_taskX -h
 
 ---
 
