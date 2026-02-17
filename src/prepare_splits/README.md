@@ -82,7 +82,7 @@ UWF4DR dataset folders and official ground-truth CSV files).
 ## Output
 
 Each script writes the prepared split files to the directory specified by the
-`--output_dir` argument (e.g., prepared_taskX/), which will contain:
+`--output_dir` argument (e.g., `prepared_taskX/`), which will contain:
 
 ~~~
 prepared_taskX/
