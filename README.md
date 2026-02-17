@@ -55,7 +55,7 @@ This repository is organized as follows:
 - `requirements/`: Dependency specifications for the different model families used in the study.
 
 - `src/`
-  - `eval/`: Evaluation scripts for CNNs (MobileNetV2, ResNet18), ViT-B/16, RETFound, and fusion (MLP) models.
+  - `eval/`: Evaluation scripts for CNNs (MobileNetV2, ResNet18), ViT-B/16, RETFound, and feature-level fusion (MLP) models.
   - `models/`: Model builders and loaders. Model architecture definitions are included, but no trained model weights are stored. Pretrained models used in the paper are hosted separately on institutional servers (BiDA Lab).
   - `prepare_splits/`: Scripts to reconstruct the exact dataset partitions described in the paper.
   - `preprocessing/`: Spatial and frequency-domain preprocessing pipelines.
@@ -66,7 +66,7 @@ This repository is organized as follows:
 
 ### 1️⃣ Reconstruct dataset splits
 
-Once authorized access to the UWF4DR dataset is obtained, users can reconstruct the exact train/validation/test partitions used in the experiments by running the task-specific split preparation scripts located in `src/prepare_splits`.
+Once authorized access to the UWF4DR dataset is obtained, users can reconstruct the exact train/validation/test partitions used in the experiments by running the task-specific split preparation scripts located in `src/prepare_splits`. This step only requires a minimal Python environment with `pandas` installed and can be executed independently of the deep learning environments used for model evaluation.
 
 Each task may require additional dataset-specific arguments. For full documentation and argument descriptions, see src/prepare_splits/README.md. You can also inspect the available options using: 
 ```bash
@@ -86,7 +86,7 @@ For detailed installation instructions and environment recommendations, see `req
 
 Once dataset partitions are prepared and model weights are available, trained models can be evaluated using the task-specific scripts located in `src/eval`.
 
-Each evaluation script corresponds to a specific model family (CNNs, ViT-B/16, RETFound, Fusion) and may require additional arguments such as model paths, domain selection (spatial or frequency), and split directory locations.
+Each evaluation script corresponds to a specific model family (CNNs, ViT-B/16, RETFound, and MLP-based feature-level fusion models) and may require additional arguments such as model paths, domain selection (spatial or frequency), and split directory locations.
 
 For full usage details and argument descriptions, see `src/eval/README.md`
 
