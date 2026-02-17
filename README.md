@@ -68,7 +68,7 @@ This repository is organized as follows:
 
 Once authorized access to the UWF4DR dataset is obtained, users can reconstruct the exact train/validation/test partitions used in the experiments by running the task-specific split preparation scripts located in `src/prepare_splits`.
 
-Each task may require additional dataset-specific arguments. For full documentation and argument descriptions, see: src/prepare_splits/README.md. You can also inspect the available options using: 
+Each task may require additional dataset-specific arguments. For full documentation and argument descriptions, see src/prepare_splits/README.md. You can also inspect the available options using: 
 ```bash
 python -m src.prepare_splits.prepare_split_task_X -h
 ```
@@ -79,8 +79,7 @@ Different model families (CNNs, ViT-B/16, and RETFound) have separate dependency
 
 Create and activate the appropriate environment before running any evaluation script.
 
-For detailed installation instructions and environment recommendations, see:
-`requirements/README.md`.
+For detailed installation instructions and environment recommendations, see `requirements/README.md`.
 
 ---
 
