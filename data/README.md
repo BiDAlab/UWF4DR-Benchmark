@@ -56,9 +56,7 @@ Each script automatically:
 - applies the authors’ experimental protocol,
 - generates CSV files defining the train, validation, and test subsets.
 
-The generated CSV files explicitly define which images belong to each subset and
-constitute the reference split definitions used throughout all experiments in
-this repository.
+The generated CSV files explicitly define which image paths and labels belong to each subset (train, validation, or test) and are used directly by the evaluation scripts provided in this repository.
 
 ---
 
