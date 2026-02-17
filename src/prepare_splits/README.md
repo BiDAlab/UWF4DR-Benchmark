@@ -52,9 +52,9 @@ One script is provided per task:
 
 - **Task 3 - Diabetic Macular Edema (DME) Identification**: `prepare_split_task_3.py` 
 
-Each script applies the corresponding split definition file from `data/splits/`
-and resolves the correct image paths from the locally available UWF4DR dataset
-folders.
+Each script applies the corresponding split definition file from `data/splits/`,
+reads the official ground-truth annotations, and resolves the correct image paths
+from the locally available UWF4DR dataset folders.
 
 ---
 
