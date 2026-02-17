@@ -80,7 +80,7 @@ Different model families (CNNs, ViT-B/16, and RETFound) have separate dependency
 Create and activate the appropriate environment before running any evaluation script.
 
 For detailed installation instructions and environment recommendations, see:
-`requirements/README.md` (if available) or the corresponding requirements file.
+`requirements/README.md`.
 
 ---
 
