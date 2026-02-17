@@ -47,7 +47,7 @@ described in the paper. Specifically, it provides:
 This repository is organized as follows:
 
 - `data/`
-  - `splits/`: Official train/validation/test CSV files used in the paper. **No image data is included.**
+  - `splits/`: Train/validation/test CSV files defining the exact dataset partitions used in the experiments reported in the paper. **No image data is included.**
   - `fusion/`: Precomputed feature embeddings (per task, domain, and backbone) used for feature-level fusion experiments.
 
 - `src/`
