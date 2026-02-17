@@ -44,7 +44,7 @@ described in the paper. Specifically, it provides:
 
 ## Repository Structure
 
-The repository is organized as follows:
+This repository is organized as follows:
 
 - `data/`
   - `splits/`: Official train/validation/test CSV files used in the paper. **No image data is included.**
