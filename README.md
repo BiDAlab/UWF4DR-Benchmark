@@ -99,20 +99,15 @@ python -m src.eval.eval_<model_family> -h
 
 ## Reproducibility and Dependencies
 
-The repository has been tested using **Python 3.10**.
+The repository has been tested with **Python 3.10**.
 
-Dependencies required for each family of models used in this study are specified in
-the `requirements/` directory.
-
-Different model families (e.g., CNN-based models, vision transformers, and retinal
-foundation models) rely on distinct software stacks and are therefore intended to be
-used in separate Python environments.
+Dependencies for each model family are specified in the `requirements/` directory and are intended to be installed in separate Python environments.
 
 ### Python Version Notes
 
-While the main repository (CNNs and ViT-B/16 models) has been tested with **Python 3.10**, the RETFound implementation is based on **Python 3.9** and TensorFlow 2.8.x, following the official RETFound repository.
+The CNNs, ViT-B/16 and feature-level fusion components were tested with Python 3.10.
 
-For full compatibility and reproducibility of RETFound experiments, we recommend creating a dedicated **Python 3.9** environment when working with the dependencies listed in `requirements/retfound.txt`.
+RETFound is based on Python 3.9 and TensorFlow 2.8.x, following the official RETFound implementation. For full compatibility, we recommend creating a dedicated Python 3.9 environment when using `requirements/retfound.txt`.
 
 ---
 
