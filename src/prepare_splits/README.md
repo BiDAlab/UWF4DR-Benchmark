@@ -1,65 +1,3 @@
-## Output
-
-Each script writes the prepared split files to the directory specified by the
-`--output_dir` argument:
-
-~~~
-output_dir/
-├── train.csv
-├── validation.csv
-└── test.csv
-~~~
-
-
-Each output CSV contains:
-
-- `image_path`: absolute path to the image on the local system
-- `label`: binary label for the corresponding task
-
-These generated CSV files are the inputs expected by the evaluation scripts in
-`src/eval/`.
-
----
-
-## Execution Notes
-
-- The scripts are intended to be executed from the **root of the repository**,
-  preferably using Python module execution (e.g., `python -m`).
-- No image data is copied or redistributed.
-- The split assignment CSV files in `data/splits/` do not contain medical labels.
-  Labels are obtained locally from the official UWF4DR ground-truth files.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Dataset Split Preparation
 
 This directory contains the scripts used to reconstruct the exact experimental
@@ -138,3 +76,37 @@ python -m src.prepare_splits.prepare_split_task_<task_number> -h
 
 Each task may require dataset-specific arguments (e.g., paths to the downloaded
 UWF4DR dataset folders and official ground-truth CSV files).
+
+---
+
+## Output
+
+Each script writes the prepared split files to the directory specified by the
+`--output_dir` argument (e.g., prepared_taskX/), which will contain:
+
+~~~
+prepared_taskX/
+├── train.csv
+├── validation.csv
+└── test.csv
+~~~
+
+Each generated CSV file contains:
+
+- `image_path`: absolute path to the image on the local system
+
+- `label`: binary task label
+
+These files can be passed directly to the evaluation scripts in src/eval/
+via the --splits_dir argument.
+
+---
+
+## Notes
+
+- No image data is copied or redistributed.
+- The split definition CSV files in data/splits/ do not contain labels. Labels are retrieved locally from the official UWF4DR ground-truth files.
+- The reconstructed splits are fully deterministic and reproduce the exact
+dataset partitions reported in the paper.
+
+---
