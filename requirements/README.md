@@ -15,4 +15,4 @@ This environment can also be used to run the MLP-based feature-level fusion expe
 Dependencies for vision transformer (ViT) models.
 
 ## retfound.txt
-Dependencies for RETFound-based retinal foundation models. This environment follows the original RETFound dependency versions and is intended to be used with Python 3.9.
+Dependencies for RETFound-based retinal foundation models. This environment follows the original RETFound dependency versions and is intended to be used with **Python 3.9**.
