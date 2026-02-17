@@ -52,7 +52,7 @@ This repository is organized as follows:
 
 - `src/`
   - `eval/`: Evaluation scripts for CNN, ViT-B/16, RETFound, and fusion (MLP) models.
-  - `models/`: Model builders and loaders (CNN backbones, ViT-B/16, RETFound wrapper, fusion MLP). Model architecture definitions are included, but no trained model weights are stored. Pretrained models used in the paper are hosted separately on institutional servers (BiDA Lab).
+  - `models/`: Model builders and loaders. Model architecture definitions are included, but no trained model weights are stored. Pretrained models used in the paper are hosted separately on institutional servers (BiDA Lab).
   - `preprocessing/`: Spatial and frequency-domain preprocessing pipelines.
   - `prepare_splits/`: Scripts to reconstruct the exact dataset partitions described in the paper.
 
