@@ -49,7 +49,7 @@ For a detailed and up-to-date description of the repository layout, please refer
 
 ---
 
-## 3. Dataset Origin and Access
+## Dataset Origin and Access
 
 The data used in this work originate from the **UWF4DR Challenge**, an official international challenge organized in the context of the **MICCAI 2024 conference**.
 
@@ -63,7 +63,7 @@ This repository is **not affiliated** with the organization of the challenge and
 
 ---
 
-### 3.1 Handling of Annotations and Licensing Constraints
+### Handling of Annotations and Licensing Constraints
 
 Due to dataset licensing constraints imposed by the UWF4DR Challenge, official annotations and ground-truth labels are **not redistributed** in this repository.
 
@@ -94,7 +94,7 @@ This design ensures:
 
 ---
 
-## 4. Dataset Split Reconstruction
+## Dataset Split Reconstruction
 
 One script is provided per task to reconstruct the exact dataset partitions used in the paper:
 
@@ -119,7 +119,7 @@ When executed correctly, the scripts generate `train.csv`, `validation.csv`, and
 
 ---
 
-## 5. Dependencies and Environments
+## Dependencies and Environments
 
 Different model families were trained using separate Python environments to ensure compatibility with their respective dependencies.
 
