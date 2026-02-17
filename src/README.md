@@ -22,15 +22,16 @@ The code in this directory follows these principles:
   preprocessing steps.
 
 - **No data hosting**:  
-  Raw images and official annotations are never stored or redistributed here. Image paths are generated locally from the     user’s downloaded UWF4DR dataset by the split preparation scripts.
+  Raw images and official annotations are never stored or redistributed here. Image paths are generated locally from the user’s downloaded UWF4DR dataset by the split preparation scripts.
 
 - **Separation of concerns**:  
   Dataset preparation, preprocessing, model definitions, and evaluation are
   clearly separated into dedicated submodules.
 
-- **Model-agnostic evaluation**:  
-  Evaluation scripts are designed to work with different backbone architectures,
-  as long as compatible model weights are provided.
+- **Architecture-specific evaluation with standardized interfaces**:  
+  Dedicated evaluation scripts are provided for each model family (CNNs,
+  ViT-B/16, RETFound, and MLP-based fusion), following a consistent interface
+  based on fixed split definitions.
 
 ---
 
@@ -52,7 +53,7 @@ The `src/` directory is organized as follows:
 
 - `models/`  
   Model architecture definitions and utility functions for loading pretrained
-  models.  
+  models (both CNNs, ViT-B/16, RETFound, and fusion MLP models).  
   **No trained model weights are stored in this repository.**
 
 ---
