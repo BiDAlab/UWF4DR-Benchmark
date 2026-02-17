@@ -116,7 +116,7 @@ This repository includes support for models fine-tuned from **RETFound**, the la
 The official Keras implementation of RETFound is available in the following repository:
 https://github.com/wangseann/RETFound_MAE_keras
 
-Within the framework of this work, RETFound is incorporated as one of the evaluated architectures and is used both as an individual classifier and as a feature extractor for MLP-based feature-level fusion experiments described in the associated paper.
+Within the experiments described in the associated paper, RETFound is incorporated as one of the evaluated architectures and is used both as an individual classifier and as a feature extractor for MLP-based feature-level fusion experiments.
 
 ### License
 
@@ -126,13 +126,14 @@ This repository:
 
 - does not redistribute the original pretrained RETFound weights,
 - does not redistribute source code from the official RETFound repository,
-- only provides wrappers to load and evaluate fine-tuned models trained using the official RETFound codebase.
+- only provides utilities to load and evaluate fine-tuned models trained using the official RETFound codebase.
 
 For full license details, please refer to the official RETFound repository.
 
 ### Requirements
 
-The file `requirements/retfound.txt` is derived from the official RETFound `requirements.txt` file and preserves the original dependency versions necessary to instantiate and use the RETFound architecture.
+The file `requirements/retfound.txt` is based on the official RETFound `requirements.txt` file and preserves the dependency versions necessary to instantiate and use the RETFound architecture.
+
 
 ### Implementation Notes
 
