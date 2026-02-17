@@ -96,3 +96,5 @@ Typical usage of the code in `src/` follows this workflow:
 4. Evaluate the models using the scripts provided in `eval/`.
 
 Detailed instructions are provided in `docs/reproducibility.md`.
+
+---
