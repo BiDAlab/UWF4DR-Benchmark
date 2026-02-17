@@ -75,9 +75,13 @@ python -m src.prepare_splits.prepare_split_task_<task_number> -h
 
 ### 2️⃣ Install dependencies
 
-Different model families (CNNs, ViT-B/16, and RETFound) have separate dependency specifications located in the `requirements/` directory.
+Different model families (CNNs, ViT-B/16, and RETFound) have separate dependency specifications located in the `requirements/` directory. Create and activate the appropriate Python environment before running any evaluation script, and install the corresponding requirements file. 
 
-Create and activate the appropriate environment before running any evaluation script.
+Example:
+
+```bash
+pip install -r requirements/<model_family>.txt
+```
 
 For detailed installation instructions and environment recommendations, see `requirements/README.md`.
 
