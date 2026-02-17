@@ -2,9 +2,7 @@
 
 This directory contains Python dependency files for the different model families used in the experiments.
 
-Each file is intended to be installed in a **separate Python environment**, as different model families rely on distinct and potentially incompatible software stacks.
-
-Unless otherwise specified, these environments were tested with **Python 3.10**.
+Each file is intended to be installed in a **separate Python environment**, as different model families rely on distinct and potentially incompatible software stacks. Unless otherwise specified, these environments were tested with **Python 3.10**.
 
 Users should select and install only the requirements file corresponding to the model family they intend to evaluate.
 
