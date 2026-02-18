@@ -65,7 +65,7 @@ python -m src.eval.eval_cnn \
   --task {task1,task2,task3} \
   --domain {spatial,frequency} \
   --backbone {mobilenetv2,resnet18} \
-  --model /path/to/model \
+  --model /path/to/cnn_model.keras \
   --splits_dir /path/to/prepared_taskX)
 ```
 
