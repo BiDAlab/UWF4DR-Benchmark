@@ -56,7 +56,7 @@ Implements frequency-domain preprocessing:
 - Resize to the required input resolution
 - 2D DFT magnitude computation
 - Clipping at the **99th percentile**
-- Min-max normalization to `[0, 1]`
+- Min-max normalization
 
 This representation is particularly useful for capturing blur and texture-related characteristics.
 
