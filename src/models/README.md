@@ -69,6 +69,10 @@ Users are expected to:
 
 ---
 
+## Pretrained Model Access
+
+---
+
 ## Design Notes
 
 - Only final models corresponding to the results reported in the paper are intended to be shared.
