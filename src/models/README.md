@@ -1,11 +1,8 @@
-# Model Architectures and Loading Utilities
+# Model Loading Utilities and Architecture Definitions
 
-This directory contains model architecture definitions and utility functions
-used to load pretrained deep learning models for evaluation.
+This directory contains model construction and loading utilities used by the evaluation pipelines of the UWF4DR benchmark.
 
-The code in this directory supports the backbone architectures considered in
-the experimental protocol described in the associated paper, but **does not
-store any trained model weights**.
+It provides lightweight builders and standardized interfaces for loading pretrained models corresponding to the architectures evaluated in the associated paper.
 
 ---
 
@@ -13,33 +10,47 @@ store any trained model weights**.
 
 The purpose of this directory is to provide:
 
-- reproducible implementations of the model architectures used in the study,
-- standardized interfaces for loading pretrained weights,
-- and a clear separation between model definition and model distribution.
+- Reproducible model construction utilities for the architectures used in the study.
+- Standardized interfaces for loading pretrained models or weights.
+- A clear separation between model definition and external model distribution.
 
-This directory is **not** intended to host trained models, checkpoints, or
-experimental results.
+This repository focuses on **evaluation and inference**.  
+Training scripts, intermediate checkpoints, and experimental logs are out of scope.
 
 ---
 
 ## Supported Architectures
 
-The following model families are supported or planned, in accordance with the
-paper:
+The following model families are implemented and supported:
 
-- **Convolutional Neural Networks (CNNs)**  
-  - MobileNetV2  
-  - ResNet18  
+- **Convolutional Neural Networks (CNNs)**
+  - MobileNetV2
+  - ResNet18
 
-- **Vision Transformer models**  
-  - ViT-B/16  
+- **Vision Transformers**
+  - ViT-B/16
 
-- **Retinal foundation models**  
-  - RETFound  
+- **Retinal Foundation Models**
+  - RETFound
 
-Architecture-specific details (e.g., input resolution, preprocessing
-requirements, and weight compatibility) are handled by the corresponding
-evaluation scripts.
+- **Feature-Level Fusion**
+  - Multilayer Perceptron (MLP) used for fusion of extracted feature embeddings
+
+Each architecture has corresponding model-building and/or loading utilities in this directory.
+
+---
+
+## Model Loading Behavior
+
+Loaders support externally provided pretrained models in standard formats, including:
+
+- Full Keras models (`.keras`)
+- Weight files (e.g., `.h5`), depending on the architecture
+
+Some architectures require specific third-party libraries (e.g., `classification_models`, `vit_keras`, `tfimm`).  
+Dependencies are organized per model family under the `requirements/` directory.
+
+Most architecture-specific configuration (e.g., input resolution, preprocessing composition, and evaluation logic) is handled by the evaluation scripts in `src/eval/`, while certain model-specific helpers are defined here.
 
 ---
 
@@ -49,34 +60,27 @@ Due to file size constraints and licensing considerations, pretrained model
 weights are **not distributed through this repository**.
 
 Instead, the pretrained models corresponding to the experiments reported in the
-paper are hosted separately on **institutional servers (BiDA Lab)**.
+paper are hosted externally on the official BiDA Lab servers.
 
 Users are expected to:
 
 1. Download the pretrained model files from the external hosting location.
 2. Provide the local path to the model weights when running evaluation scripts.
 
-Details regarding model availability and access instructions will be provided
-separately by the authors.
-
 ---
 
 ## Design Notes
 
-- Only final models corresponding to the results reported in the paper are
-  intended to be shared.
-- Intermediate checkpoints, training logs, and auxiliary artifacts are not
-  distributed.
-- The code in this directory is written to be compatible with externally hosted
-  model files without requiring modification of the repository structure.
+- Only final models corresponding to the results reported in the paper are intended to be shared.
+- Intermediate checkpoints, training logs, and auxiliary artifacts are not distributed.
+- Model utilities are designed to be compatible with externally hosted files without requiring modification of the repository structure.
 
 ---
 
 ## Relation to Evaluation Code
 
-The model loading utilities defined here are used by the evaluation scripts in
-`src/eval/`.
+The model-loading utilities defined here are invoked internally by the evaluation scripts in `src/eval/`.
 
-As additional evaluation pipelines (e.g., for ViT or RETFound) are incorporated
-into the repository, corresponding model-loading logic will be added to this
-directory.
+This directory provides modular model construction and loading components, while the evaluation scripts orchestrate preprocessing, model instantiation, and metric computation.
+
+---
