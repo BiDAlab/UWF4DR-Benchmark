@@ -1,20 +1,16 @@
-# src/eval/eval_retfound.py
 import argparse
 import os
 import numpy as np
 import tensorflow as tf
 from sklearn.metrics import roc_auc_score, average_precision_score, roc_curve
 
-# IMPORTANT:
-# - We keep the spatial loading path exactly as before (load_retfound_model).
-# - We use a dedicated loader ONLY for RETFound + frequency.
 from src.models.retfound_loader import load_retfound_model, load_retfound_model_frequency
 
 from src.preprocessing.frequency import center_crop, freq_transform_mag_clipped  # reuse your exact code
 
 
 # ---------------------------------------------------------------------
-# Spatial (RGB) pipeline (match main_finetune.py)
+# Spatial (RGB) pipeline
 # ---------------------------------------------------------------------
 
 def center_crop_and_resize(image, crop_size=(800, 800), resize_size=(224, 224)):
@@ -39,10 +35,8 @@ def preprocess_spatial_tf(path, label):
     image = tf.io.read_file(path)
     image = tf.image.decode_jpeg(image, channels=3)
 
-    # EXACTLY like main_finetune.py: first resize to (800, 1016)
     image = tf.image.resize(image, (800, 1016))
 
-    # then center-crop 800x800 and resize to 224x224
     image = center_crop_and_resize(image, crop_size=(800, 800), resize_size=(224, 224))
 
     # normalize to [0,1]
@@ -62,7 +56,7 @@ def _freq_from_path_py(path_tensor):
 
     Returns float32 (224,224,3) in [0,1].
     """
-    import cv2  # ensure available in env
+    import cv2
     path = path_tensor.numpy().decode("utf-8")
 
     img = cv2.imread(path)
@@ -71,24 +65,23 @@ def _freq_from_path_py(path_tensor):
 
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-    # EXACT as your offline generator
     img = center_crop(img, crop_size=(800, 800))
-    img = cv2.resize(img, (224, 224))  # default interpolation is INTER_LINEAR
+    img = cv2.resize(img, (224, 224))
 
     mag = freq_transform_mag_clipped(img)
 
     mag_u8 = np.clip(np.rint(mag), 0, 255).astype(np.uint8)
 
-    # keep this because it matches your existing evaluation attempt
-    mag_u8 = mag_u8[..., ::-1]
+    #mag_u8 = mag_u8[..., ::-1]
 
-    # emulate disk-save JPEG roundtrip (as in your previous evaluation attempt)
-    _, buffer = cv2.imencode(".jpg", mag_u8)
-    mag_jpeg = cv2.imdecode(buffer, cv2.IMREAD_COLOR)
+    #_, buffer = cv2.imencode(".jpg", mag_u8)
+    #mag_jpeg = cv2.imdecode(buffer, cv2.IMREAD_COLOR)
 
-    mag_jpeg = cv2.cvtColor(mag_jpeg, cv2.COLOR_BGR2RGB)
+    #mag_jpeg = cv2.cvtColor(mag_jpeg, cv2.COLOR_BGR2RGB)
 
-    out = mag_jpeg.astype(np.float32) / 255.0
+    #out = mag_jpeg.astype(np.float32) / 255.0
+
+    out = mag_u8.astype(np.float32) / 255.0
     return out
 
 
