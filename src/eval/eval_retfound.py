@@ -65,13 +65,14 @@ def _freq_from_path_py(path_tensor):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
     img = center_crop(img, crop_size=(800, 800))
-    img = cv2.resize(img, (224, 224))
+    img = cv2.resize(img, (224, 224), interpolation=cv2.INTER_LINEAR)
 
     mag = freq_transform_mag_clipped(img)
 
-    mag_u8 = np.clip(np.rint(mag), 0, 255).astype(np.uint8)
+    #mag_u8 = np.clip(np.rint(mag), 0, 255).astype(np.uint8)
+    mag_u8 = np.clip(mag, 0, 255).astype(np.uint8)
 
-    mag_u8 = mag_u8[..., ::-1]
+    #mag_u8 = mag_u8[..., ::-1]
 
     _, buffer = cv2.imencode(".jpg", mag_u8)
     mag_jpeg = cv2.imdecode(buffer, cv2.IMREAD_COLOR)
