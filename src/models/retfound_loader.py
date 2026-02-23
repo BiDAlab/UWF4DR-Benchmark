@@ -1,7 +1,6 @@
 from __future__ import annotations
 import tensorflow as tf
 
-
 # ---------------------------------------------------------------------
 # Model construction
 # ---------------------------------------------------------------------
@@ -133,9 +132,6 @@ def build_retfound_feature_extractor(
 
 
 
-from __future__ import annotations
-
-import tensorflow as tf
 
 
 def _build_vit(num_classes: int, variant: str) -> tf.keras.Model:
