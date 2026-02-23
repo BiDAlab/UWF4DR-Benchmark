@@ -144,62 +144,20 @@ def _copy_group_recursive(src_group, dst_group) -> None:
 
 def load_retfound_model_frequency(weights_path: str, num_classes: int = 2) -> tf.keras.Model:
     """
-    Load Fourier-domain RETFound checkpoint reliably.
+    Build RETFound exactly like in main_finetune_fourier.py:
+        Input -> vit_large_patch16_224
 
-    If the .h5 file is nested under the group 'vit_large_patch16_224', we
-    flatten it into a temporary .h5 (copying also 'top_level_model_weights')
-    and then load strictly to avoid silent partial-loading.
-
-    This is only meant for RETFound + frequency evaluation.
+    Then load weights by name.
     """
-    import h5py
+    # Build base ViT
+    vit = build_retfound_model(num_classes=num_classes)
 
-    model = build_retfound_model(num_classes=num_classes)
-    _ = model(tf.zeros((1, 224, 224, 3)))  # force build
+    inputs = tf.keras.Input(shape=(224, 224, 3))
+    outputs = vit(inputs)
+    model = tf.keras.Model(inputs, outputs)
 
-    with h5py.File(weights_path, "r") as f:
-        top_groups = list(f.keys())
+    _ = model(tf.zeros((1, 224, 224, 3)))
 
-    # If it's already flat, keep the original behavior (by_name+skip_mismatch)
-    # to minimize risk — but this branch is still only used in frequency.
-    if "vit_large_patch16_224" not in top_groups:
-        return load_retfound_weights(model, weights_path)
+    model.load_weights(weights_path, by_name=True)
 
-    print("[RETFound] Detected nested Fourier .h5 structure. Flattening to load correctly...")
-
-    # Create a temp file safely on Windows
-    tmp_fd: Optional[int] = None
-    tmp_path: Optional[str] = None
-    try:
-        tmp_fd, tmp_path = tempfile.mkstemp(suffix=".h5")
-        os.close(tmp_fd)  # will be reopened by h5py
-
-        with h5py.File(weights_path, "r") as f_in, h5py.File(tmp_path, "w") as f_out:
-            # 1) Copy vit_large_patch16_224/* into root
-            _copy_group_recursive(f_in["vit_large_patch16_224"], f_out)
-
-            # 2) Preserve top_level_model_weights (important to avoid top-level warnings)
-            if "top_level_model_weights" in f_in:
-                tlm = f_out.create_group("top_level_model_weights")
-                _copy_group_recursive(f_in["top_level_model_weights"], tlm)
-
-        # Prefer strict load first (so we don't silently end up with random-ish results)
-        try:
-            model.load_weights(tmp_path)  # strict
-        except Exception as e:
-            print(
-                "[RETFound] WARNING: strict weight loading failed after flattening.\n"
-                "Falling back to by_name=True, skip_mismatch=True.\n"
-                f"  Reason: {type(e).__name__}: {e}"
-            )
-            model.load_weights(tmp_path, by_name=True, skip_mismatch=True)
-
-        _ = model(tf.zeros((1, 224, 224, 3)))  # force build again
-        return model
-
-    finally:
-        if tmp_path and os.path.exists(tmp_path):
-            try:
-                os.remove(tmp_path)
-            except OSError:
-                pass
+    return model
