@@ -79,7 +79,7 @@ def _freq_from_path_py(path_tensor):
     #_, buffer = cv2.imencode(".jpg", cv2.cvtColor(mag_u8, cv2.COLOR_BGR2RGB))
     mag_jpeg = cv2.imdecode(buffer, cv2.IMREAD_COLOR)
 
-    #mag_jpeg = cv2.cvtColor(mag_jpeg, cv2.COLOR_BGR2RGB)
+    mag_jpeg = cv2.cvtColor(mag_jpeg, cv2.COLOR_BGR2RGB)
 
     out = mag_jpeg.astype(np.float32) / 255.0
     
