@@ -6,7 +6,7 @@ from sklearn.metrics import roc_auc_score, average_precision_score, roc_curve
 
 from src.models.retfound_loader import load_retfound_model, load_retfound_model_frequency
 
-from src.preprocessing.frequency import center_crop, freq_transform_mag_clipped  # reuse your exact code
+from src.preprocessing.frequency import center_crop, freq_transform_mag_clipped  
 
 
 # ---------------------------------------------------------------------
