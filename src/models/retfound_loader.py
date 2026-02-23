@@ -135,22 +135,14 @@ def build_retfound_feature_extractor(
 
 
 def _build_vit(num_classes: int, variant: str) -> tf.keras.Model:
-    try:
-        import tfimm
-    except ImportError as e:
-        raise ImportError(
-            "tfimm is required for RETFound support.\n"
-            "Install it using: pip install -r requirements/retfound.txt"
-        ) from e
-
-    model_name = "vit_large_patch16_224_mae" if variant == "mae" else "vit_large_patch16_224"
+    import tfimm
+    # ignore "variant" for now; keep API stable
     vit = tfimm.create_model(
-        model_name,
+        "vit_large_patch16_224",
         nb_classes=num_classes,
         pretrained=False,
     )
     return vit
-
 
 def _wrap_with_aug(vit: tf.keras.Model) -> tf.keras.Model:
     # Same structure used in main_finetune_fourier.py when cutmix == 0
@@ -196,23 +188,28 @@ def _count_name_matches(model: tf.keras.Model, saved_names: set[str]) -> int:
 
 
 def load_retfound_model_auto(weights_path: str, num_classes: int = 2) -> tf.keras.Model:
+    """
+    Auto-select the correct RETFound wrapping to best match a given .h5 file.
+    We DO NOT try *_mae here because many tfimm versions don't ship it.
+    """
     saved = _h5_weight_names(weights_path)
 
     candidates = []
-    for variant in ("plain", "mae"):
-        vit = _build_vit(num_classes=num_classes, variant=variant)
-        _force_build(vit)
-        candidates.append((variant, False, vit))
 
-        vit2 = _build_vit(num_classes=num_classes, variant=variant)
-        wrapped = _wrap_with_aug(vit2)
-        _force_build(wrapped)
-        candidates.append((variant, True, wrapped))
+    # Only "plain" variant available in your tfimm
+    vit = _build_vit(num_classes=num_classes, variant="plain")
+    _force_build(vit)
+    candidates.append(("plain", False, vit))
+
+    vit2 = _build_vit(num_classes=num_classes, variant="plain")
+    wrapped = _wrap_with_aug(vit2)
+    _force_build(wrapped)
+    candidates.append(("plain", True, wrapped))
 
     scored = []
-    for variant, wrapped, model in candidates:
+    for variant, wrapped_flag, model in candidates:
         score = _count_name_matches(model, saved)
-        scored.append((score, variant, wrapped, model))
+        scored.append((score, variant, wrapped_flag, model))
 
     scored.sort(reverse=True, key=lambda x: x[0])
     best_score, best_variant, best_wrapped, best_model = scored[0]
