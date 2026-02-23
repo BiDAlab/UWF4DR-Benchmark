@@ -4,7 +4,7 @@ import numpy as np
 import tensorflow as tf
 from sklearn.metrics import roc_auc_score, average_precision_score, roc_curve
 
-from src.models.retfound_loader import load_retfound_model
+from src.models.retfound_loader import load_retfound_model, load_retfound_model_auto
 from src.preprocessing.frequency import center_crop, freq_transform_mag_clipped  # reutiliza EXACTO tu código
 
 
@@ -148,8 +148,13 @@ def main():
     ds = ds.batch(args.batch_size).prefetch(tf.data.AUTOTUNE)
 
     print("Loading RETFound model...")
-    model = load_retfound_model(args.model, num_classes=args.num_classes)
+#   model = load_retfound_model(args.model, num_classes=args.num_classes)
+    if args.domain == "frequency":
+        model = load_retfound_model_auto(args.model, num_classes=args.num_classes)
+    else:
+        model = load_retfound_model(args.model, num_classes=args.num_classes)
 
+    
     print("Running inference...")
     logits = model.predict(ds, verbose=1)
 
