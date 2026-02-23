@@ -72,7 +72,7 @@ def _freq_from_path_py(path_tensor):
 
     mag_u8 = np.clip(np.rint(mag), 0, 255).astype(np.uint8)
 
-    #mag_u8 = mag_u8[..., ::-1]
+    mag_u8 = mag_u8[..., ::-1]
 
     #_, buffer = cv2.imencode(".jpg", mag_u8)
     #mag_jpeg = cv2.imdecode(buffer, cv2.IMREAD_COLOR)
