@@ -39,7 +39,6 @@ def preprocess_spatial_tf(path, label):
 
     image = center_crop_and_resize(image, crop_size=(800, 800), resize_size=(224, 224))
 
-    # normalize to [0,1]
     image = tf.cast(image, tf.float32) / 255.0
     return image, label
 
@@ -72,7 +71,7 @@ def _freq_from_path_py(path_tensor):
 
     mag_u8 = np.clip(np.rint(mag), 0, 255).astype(np.uint8)
 
-    #mag_u8 = mag_u8[..., ::-1]
+    mag_u8 = mag_u8[..., ::-1]
 
     _, buffer = cv2.imencode(".jpg", mag_u8)
     mag_jpeg = cv2.imdecode(buffer, cv2.IMREAD_COLOR)
@@ -80,8 +79,7 @@ def _freq_from_path_py(path_tensor):
     mag_jpeg = cv2.cvtColor(mag_jpeg, cv2.COLOR_BGR2RGB)
 
     out = mag_jpeg.astype(np.float32) / 255.0
-
-    #out = mag_u8.astype(np.float32) / 255.0
+    
     return out
 
 
