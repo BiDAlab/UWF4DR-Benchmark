@@ -70,7 +70,7 @@ def _freq_from_path_py(path_tensor):
     mag = freq_transform_mag_clipped(img)
 
     #mag_u8 = np.clip(np.rint(mag), 0, 255).astype(np.uint8)
-    mag_u8 = np.clip(mag, 0, 255).astype(np.uint8)
+    #mag_u8 = np.clip(mag, 0, 255).astype(np.uint8)
 
     #mag_u8 = mag_u8[..., ::-1]
 
