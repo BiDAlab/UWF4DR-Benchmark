@@ -188,35 +188,42 @@ def _count_name_matches(model: tf.keras.Model, saved_names: set[str]) -> int:
 
 
 def load_retfound_model_auto(weights_path: str, num_classes: int = 2) -> tf.keras.Model:
-    """
-    Auto-select the correct RETFound wrapping to best match a given .h5 file.
-    We DO NOT try *_mae here because many tfimm versions don't ship it.
-    """
-    saved = _h5_weight_names(weights_path)
+    import h5py
+    import tempfile
+    import os
 
-    candidates = []
+    # Build normal model (same as spatial)
+    model = _build_vit(num_classes=num_classes, variant="plain")
+    _force_build(model)
 
-    # Only "plain" variant available in your tfimm
-    vit = _build_vit(num_classes=num_classes, variant="plain")
-    _force_build(vit)
-    candidates.append(("plain", False, vit))
+    # Check if weights are nested under vit_large_patch16_224/
+    with h5py.File(weights_path, "r") as f:
+        top_groups = list(f.keys())
 
-    vit2 = _build_vit(num_classes=num_classes, variant="plain")
-    wrapped = _wrap_with_aug(vit2)
-    _force_build(wrapped)
-    candidates.append(("plain", True, wrapped))
+    if "vit_large_patch16_224" not in top_groups:
+        # Normal RGB-style file
+        model.load_weights(weights_path, by_name=True, skip_mismatch=True)
+        return model
 
-    scored = []
-    for variant, wrapped_flag, model in candidates:
-        score = _count_name_matches(model, saved)
-        scored.append((score, variant, wrapped_flag, model))
+    # ---- Fourier-style nested file ----
+    print("[RETFound] Detected nested weight structure. Fixing prefix...")
 
-    scored.sort(reverse=True, key=lambda x: x[0])
-    best_score, best_variant, best_wrapped, best_model = scored[0]
+    tmp_path = tempfile.mktemp(suffix=".h5")
 
-    best_model.load_weights(weights_path, by_name=True, skip_mismatch=True)
-    _force_build(best_model)
+    with h5py.File(weights_path, "r") as f_in, h5py.File(tmp_path, "w") as f_out:
+        def copy_group(src_group, dst_group):
+            for key, item in src_group.items():
+                if isinstance(item, h5py.Group):
+                    new_group = dst_group.create_group(key)
+                    copy_group(item, new_group)
+                else:
+                    src_group.copy(key, dst_group)
 
-    print(f"[RETFound] auto-selected variant={best_variant}, wrapped={best_wrapped}, matched_weights={best_score}")
+        # Copy everything inside vit_large_patch16_224 to root
+        copy_group(f_in["vit_large_patch16_224"], f_out)
 
-    return best_model
+    model.load_weights(tmp_path, by_name=True, skip_mismatch=True)
+
+    os.remove(tmp_path)
+
+    return model
