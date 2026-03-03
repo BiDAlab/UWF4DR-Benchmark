@@ -88,7 +88,17 @@ For detailed installation instructions and environment recommendations, see `req
 
 ### 3️⃣ Evaluate trained models
 
-Once dataset partitions are prepared and model weights are available, trained models can be evaluated using the task-specific scripts located in `src/eval`.
+3️⃣ **Download and evaluate pretrained models**  
+
+Pretrained model weights are hosted externally on the BiDA Lab server and are not included in this repository.
+
+Download them from:
+
+https://bidalab.eps.uam.es/static/UWF4DR-Benchmark/Models.zip
+
+After downloading, unzip the file locally (e.g., into `models/pretrained/`) and provide the corresponding model file paths to the evaluation scripts.
+
+Once dataset partitions are prepared and pretrained weights are available locally, trained models can be evaluated using the task-specific scripts located in `src/eval`.
 
 Each evaluation script corresponds to a specific model family (CNNs, ViT-B/16, RETFound, and MLP-based feature-level fusion models) and may require additional arguments such as model paths, domain selection (spatial or frequency), and split directory locations.
 
