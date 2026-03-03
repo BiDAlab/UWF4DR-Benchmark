@@ -81,9 +81,13 @@ The code in `src/` is intended to be used in conjunction with:
 Pretrained model weights corresponding to the experiments reported in the paper
 are **not distributed** within this repository.
 
-They are hosted separately on institutional servers (BiDA Lab) and are expected
-to be downloaded and referenced locally by the user when running evaluation
-scripts.
+They are hosted externally by BiDA Lab:
+
+https://bidalab.eps.uam.es/static/UWF4DR-Benchmark/Models.zip
+
+Please download and extract the pretrained models locally before running evaluation scripts.
+
+See `src/models/README.md` for detailed download and usage instructions.
 
 ---
 
