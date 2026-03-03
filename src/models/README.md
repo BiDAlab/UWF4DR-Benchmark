@@ -71,6 +71,30 @@ Users are expected to:
 
 ## Pretrained Model Access
 
+Pretrained model weights are hosted externally by BiDA Lab and are not included in this repository.
+
+Download link:
+
+https://bidalab.eps.uam.es/static/UWF4DR-Benchmark/Models.zip
+
+### Download instructions
+
+Using wget:
+
+```bash
+wget https://bidalab.eps.uam.es/static/UWF4DR-Benchmark/Models.zip
+unzip Models.zip -d models/pretrained
+```
+
+Or using curl:
+
+```bash
+curl -O https://bidalab.eps.uam.es/static/UWF4DR-Benchmark/Models.zip
+unzip Models.zip -d models/pretrained
+```
+
+You may store the extracted files in any local directory.
+
 ---
 
 ## Design Notes
