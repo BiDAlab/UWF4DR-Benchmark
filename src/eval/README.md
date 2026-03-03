@@ -66,7 +66,7 @@ python -m src.eval.eval_cnn \
   --domain {spatial,frequency} \
   --backbone {mobilenetv2,resnet18} \
   --model /path/to/cnn_model.keras \
-  --splits_dir /path/to/prepared_taskX)
+  --splits_dir /path/to/prepared_taskX
 ```
 
 **Arguments**
@@ -117,7 +117,7 @@ python -m src.eval.eval_retfound \
   --task {task1,task2,task3} \
   --domain {spatial,frequency} \
   --model /path/to/retfound_weights.h5 \
-  --splits_dir /path/to/prepared_taskX)
+  --splits_dir /path/to/prepared_taskX
 ```
 
 **Arguments**
