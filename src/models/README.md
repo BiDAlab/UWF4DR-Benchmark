@@ -93,7 +93,7 @@ curl -O https://bidalab.eps.uam.es/static/UWF4DR-Benchmark/Models.zip
 unzip Models.zip -d models/pretrained
 ```
 
-You may store the extracted files in any local directory.
+You may also download the ZIP file directly using your browser and extract it locally.
 
 ---
 
