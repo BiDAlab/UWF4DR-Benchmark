@@ -92,7 +92,7 @@ python -m src.eval.eval_vit \
   --task {task1,task2,task3} \
   --domain {spatial,frequency} \
   --model /path/to/vit_model.keras \
-  --splits_dir /path/to/prepared_taskX)
+  --splits_dir /path/to/prepared_taskX
 ```
 
 **Arguments**
