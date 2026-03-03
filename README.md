@@ -86,9 +86,7 @@ pip install -r requirements/<model_family>.txt
 For detailed installation instructions and environment recommendations, see `requirements/README.md`.
 
 
-### 3️⃣ Evaluate trained models
-
-3️⃣ **Download and evaluate pretrained models**  
+### 3️⃣ **Download and evaluate pretrained models**  
 
 Pretrained model weights are hosted externally on the BiDA Lab server and are not included in this repository.
 
